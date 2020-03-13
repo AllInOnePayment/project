@@ -25,11 +25,11 @@ class HomeController extends Controller
     public function index()
     {   
         //return view('home');
-        if(Auth::user()->system_id == 0)
+        if(Auth::user()->service_id == 0)
         {
             return redirect('/main');
         }
-        elseif(Auth::user()->system_id == 1)
+        elseif(Auth::user()->service_id == 1)
         {
             return redirect('/manage_user');
         }

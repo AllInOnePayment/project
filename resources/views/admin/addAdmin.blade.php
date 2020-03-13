@@ -1,8 +1,5 @@
-@extends('layouts.app')
-
-@section('navbar')
-    @include('inc.navbar2');
-@endsection
+@extends('layouts.admin')
+  
 @section('content')
 <div class="container">
     this is add admin page.
