@@ -38,15 +38,12 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="#" class="nav-link">All In | ONE</a>
       </li>
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!-- <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -55,7 +52,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> -->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -201,45 +198,48 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+          
+          <!-- This funcion will be used to check the URI and make the approprate tab active, segment is the variable that holds the name of the current uri  -->
+               <?php
+                    $segment = Request::segment(2); 
+                ?>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link 
+            @if($segment=='user')
+             active
+             @endif">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 User Management
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview"> 
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="{{ route('admin.user.index')}}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>View List</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="{{ route('admin.user.index')}}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Update User</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="{{ route('admin.user.create')}}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Register User</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Detail User</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link  
+            @if($segment=='service')
+             active
+             @endif">
               <i class="nav-icon fa fa-pie-chart"></i>
               <p>
                 Servicess
@@ -248,9 +248,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+              <a href="{{ route('admin.service.index')}}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Add Service</p>
+                  <p>View Services</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -262,13 +262,16 @@
               <li class="nav-item">
                 <a href="pages/charts/inline.html" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Delete Service</p>
+                  <p>Control Service</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link 
+            @if($segment=='bank')
+             active
+             @endif">
               <i class="nav-icon fa fa-tree"></i>
               <p>
                 Manage Systems
@@ -277,7 +280,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
+                <a href="{{ route('admin.bank.index')}}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Mobile Bank</p>
                 </a>

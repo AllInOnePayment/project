@@ -37,8 +37,12 @@ Route::view('/profile', 'users.profile');
 Route::view('/register_service', 'users.registerService');
 
 // route for admin
-Route::view('/manage_user', 'admin/manageUser');
+Route::view('/admin', 'admin/manageUser')->name('adminhome');
+Route::resource('/admin/user', 'Admin\UserController',['as'=>'admin']);
+Route::resource('/admin/bank', 'Admin\BankController',['as'=>'admin']);
+Route::resource('/admin/service', 'Admin\ServiceController',['as'=>'admin']);
 Route::view('/manage_service', 'admin/manageService');
+Route::view('/admin/update','admin/user/update');
 Route::view('/add_admin', 'admin/addAdmin');
 Route::view('/manage_bank', 'admin/manageBank');
 

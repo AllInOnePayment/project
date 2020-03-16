@@ -14,7 +14,7 @@ class CreateMobileBankListsTable extends Migration
     public function up()
     {
         Schema::create('mobile_bank_lists', function (Blueprint $table) {
-            $table->bigIncrements('mobile_bank_id');
+            $table->bigIncrements('id');
             $table->string('bank_name');
             $table->string('http');
             $table->timestamps();

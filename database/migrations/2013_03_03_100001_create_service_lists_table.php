@@ -14,6 +14,7 @@ class CreateServiceListsTable extends Migration
     public function up()
     {
         Schema::create('service_lists', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('service_id')->unique()->unsigned();
             $table->string('service_name');
             $table->string('http')->nullable();
@@ -21,8 +22,7 @@ class CreateServiceListsTable extends Migration
             $table->bigInteger('mobile_bank_id')->nullable()->unsigned();
             $table->timestamps();
 
-            $table->primary('service_id');
-            $table->foreign('mobile_bank_id')->references('mobile_bank_id')->
+            $table->foreign('mobile_bank_id')->references('id')->
                                 on('mobile_bank_lists')->onDelete('cascade');
         });
     }

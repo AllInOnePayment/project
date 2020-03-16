@@ -14,8 +14,9 @@ class CreateNewsInfosTable extends Migration
     public function up()
     {
         Schema::create('news_infos', function (Blueprint $table) {
-            $table->bigIncrements('news_id');
+            $table->bigIncrements('id');
             $table->bigInteger('service_id')->unsigned();
+            $table->string('title');
             $table->text('news');
             $table->date('start_date');
             $table->date('expire_date');

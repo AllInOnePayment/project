@@ -14,16 +14,16 @@ class CreateSchoolBillsTable extends Migration
     public function up()
     {
         Schema::create('school_bills', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('bill_id')->unique()->unsigned();
             $table->integer('school_bill');
             $table->integer('transport_bill')->nullable();
             $table->integer('other_bill')->nullable();
             $table->string('receipt_number');
             $table->integer('total_amount');
-            $table->binary('status');
+            $table->integer('status');
             $table->timestamps();
 
-            $table->primary('bill_id');
             $table->foreign('bill_id')->references('bill_id')->
                                 on('register_services')->onDelete('cascade');
         });

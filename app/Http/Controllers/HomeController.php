@@ -31,7 +31,8 @@ class HomeController extends Controller
         }
         elseif(Auth::user()->service_id == 1)
         {
-            return redirect('/manage_user');
+            $arr['userinfo'] = Auth::user();
+            return redirect()->route('adminhome')->with($arr);
         }
         else
         {
