@@ -14,10 +14,10 @@ class CreateHistoriesTable extends Migration
     public function up()
     {
         Schema::create('histories', function (Blueprint $table) {
-            $table->bigIncrements('history_id');
+            $table->bigIncrements('id');
             $table->date('date_payment');
             $table->bigInteger('service_id')->unsigned();
-            $table->bigInteger('id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->integer('amount');
             $table->integer('old_balance');
             $table->integer('current_balance');
@@ -27,7 +27,7 @@ class CreateHistoriesTable extends Migration
 
             $table->foreign('service_id')->references('service_id')->
                                 on('service_lists')->onDelete('cascade');
-            $table->foreign('id')->references('id')->
+            $table->foreign('user_id')->references('id')->
                                 on('users')->onDelete('cascade');
         });
     }
