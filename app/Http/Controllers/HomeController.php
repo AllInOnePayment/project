@@ -34,9 +34,9 @@ class HomeController extends Controller
             return redirect('/manage_user');
         }
         else
-        {
+        {   
             $d=ServiceList::all()->where('service_id',Auth::user()->service_id);
-            
+        
             foreach($d as $a)
             { 
                 session()->put('service_name',$a->service_name); 
