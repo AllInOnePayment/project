@@ -13,12 +13,10 @@ class ServiceListTableSeeder extends Seeder
     public function run()
     {
         DB::table('service_lists')->insert([
-            'service_id'=>0,
-            'service_name'=>'AllInOne'
+            'service_name'=>'AllInOneUser'
         ]);
         DB::table('service_lists')->insert([
-            'service_id'=>1,
-            'service_name'=>'AllInOne'
+            'service_name'=>'AllInOneAdmin'
         ]);
     }
 }

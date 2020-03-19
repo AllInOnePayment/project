@@ -15,11 +15,11 @@ class CreateBanksTable extends Migration
     {
         Schema::create('banks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('phone')->unique()->unsigned();
+            $table->bigInteger('user_id')->unique()->unsigned();
             $table->bigInteger('balance')->default(0);
             $table->timestamps();
 
-            $table->foreign('phone')->references('phone')->
+            $table->foreign('user_id')->references('id')->
                                 on('users')->onDelete('cascade');
         });
     }

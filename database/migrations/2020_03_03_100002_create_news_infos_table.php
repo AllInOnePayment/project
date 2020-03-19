@@ -18,13 +18,13 @@ class CreateNewsInfosTable extends Migration
             $table->bigInteger('service_id')->unsigned();
             $table->string('body');
             $table->text('news');
-            $table->date('start_date');
-            $table->date('expire_date');
+            $table->date('start_date')->nullable();
+            $table->date('expire_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('service_id')->references('service_id')->
+            $table->foreign('service_id')->references('id')->
                                 on('service_lists')->onDelete('cascade');
-        });
+       });
     }
 
     /**

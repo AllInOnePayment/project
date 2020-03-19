@@ -19,17 +19,17 @@ class CreateRegisterServicesTable extends Migration
             $table->bigInteger('student_id')->nullable()->unsigned();
             $table->bigInteger('service_number')->nullable()->unsigned();
             $table->bigInteger('service_id')->unsigned();
-            $table->bigInteger('bill_id')->unique()->unsigned();
             $table->timestamps();
 
-            $table->foreign('service_id')->references('service_id')->on('service_lists')
+            $table->foreign('service_id')->references('id')->on('service_lists')
             ->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('student_id')->references('student_id')
+            $table->foreign('student_id')->references('id')
             ->on('schools')->onDelete('cascade');
-            $table->foreign('service_number')->references('service_number')
+            $table->foreign('service_number')->references('id')
             ->on('service_providers')->onDelete('cascade');
-        });
+
+         });
     }
 
     /**

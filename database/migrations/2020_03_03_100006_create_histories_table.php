@@ -25,11 +25,11 @@ class CreateHistoriesTable extends Migration
             $table->string('receipt_file');
             $table->timestamps();
 
-            $table->foreign('service_id')->references('service_id')->
+            $table->foreign('service_id')->references('id')->
                                 on('service_lists')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->
                                 on('users')->onDelete('cascade');
-        });
+       });
     }
 
     /**
