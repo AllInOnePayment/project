@@ -15,7 +15,7 @@ class TestsController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-        $data['service_id']=1;
+        $data['service_id']=2;
         $data['password']= Hash::make($data['password']);
         User::create($data);
         return redirect('/');

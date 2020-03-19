@@ -17,6 +17,7 @@ class CreateMobileBankListsTable extends Migration
             $table->bigIncrements('id');
             $table->string('bank_name');
             $table->string('http');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

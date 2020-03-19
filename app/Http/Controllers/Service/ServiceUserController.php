@@ -26,7 +26,7 @@ class ServiceUserController extends Controller
     public function index()
     {   $id=session()->get('service_id');
         
-        if($id==2 || $id==3 || $id==4)
+        if($id==3 || $id==4 || $id==5)
         {
               $data=DB::table('service_providers')->whereService_idAndStatus($id, 0)->get();
             
@@ -47,7 +47,7 @@ class ServiceUserController extends Controller
     {
         $id=session()->get('service_id');
         
-        if($id==2 || $id==3 || $id==4)
+        if($id==3 || $id==4 || $id==5)
         { // insert in to ServiceProvider model
              
             
@@ -80,7 +80,7 @@ class ServiceUserController extends Controller
     {
         $id=session()->get('service_id');
         
-        if($id==2 || $id==3 || $id==4)
+        if($id==3 || $id==4 || $id==5)
         { // insert in to ServiceProvider model
              
             
@@ -102,7 +102,7 @@ class ServiceUserController extends Controller
     {
         $id=session()->get('service_id');
         
-        if($id==2 || $id==3 || $id==4)
+        if($id==3 || $id==4 || $id==5)
         { // insert in to ServiceProvider model
              
             

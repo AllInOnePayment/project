@@ -18,7 +18,7 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
             @else
-                @if (Auth::user()->service_id == 0)
+                @if (Auth::user()->service_id == 1)
                     <li class="nav-item">
                         <a class="nav-link" href="main">Home</a>
                     </li>

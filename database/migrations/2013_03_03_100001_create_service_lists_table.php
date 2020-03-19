@@ -15,11 +15,11 @@ class CreateServiceListsTable extends Migration
     {
         Schema::create('service_lists', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('service_id')->unique()->unsigned();
             $table->string('service_name');
             $table->string('http')->nullable();
             $table->bigInteger('bank_account')->nullable();
             $table->bigInteger('mobile_bank_id')->nullable()->unsigned();
+            $table->string('image')->nullable();
             $table->timestamps();
 
             $table->foreign('mobile_bank_id')->references('id')->

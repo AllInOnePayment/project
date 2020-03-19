@@ -19,7 +19,7 @@
                 </li>
             @else
 
-                @elseif (Auth::user()->service_id > 1)
+                @elseif (Auth::user()->service_id > 2)
                 <li class="nav-item">
                     <a class="nav-link" href="manage_service_user">manage service user</a>
                 </li>

@@ -17,15 +17,15 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->bigInteger('phone')->unique()->unsigned();
-            $table->bigInteger('service_id')->unsigned();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->bigInteger('service_id')->unsigned();
             $table->string('image')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('service_id')->references('service_id')->
+            $table->foreign('service_id')->references('id')->
                                 on('service_lists')->onDelete('cascade');
         });
 
