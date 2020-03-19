@@ -14,14 +14,15 @@ class CreateServiceProvidersTable extends Migration
     public function up()
     {
         Schema::create('service_providers', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('service_number')->unique()->unsigned();
             $table->bigInteger('service_id')->unsigned();
             $table->string('user_name');
             $table->string('addres');
-            $table->binary('status');
+            $table->integer('status');
+            $table->integer('Payment_status');
             $table->timestamps();
 
-            $table->primary('service_number');
             $table->foreign('service_id')->references('service_id')->
                                 on('service_lists')->onDelete('cascade');
         });

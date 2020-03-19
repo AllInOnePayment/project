@@ -13,13 +13,15 @@ class CreateSchoolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('schools', function (Blueprint $table) {
-            $table->bigIncrements('student_id');
+        Schema::create('schools', function (Blueprint $table) { 
+            $table->bigIncrements('id');
+            $table->bigInteger('student_id')->unique()->unsigned();
             $table->bigInteger('service_id')->unsigned();
             $table->string('user_name');
             $table->integer('level');
-            $table->binary('status');
-            $table->binary('transport');
+            $table->integer('status');
+            $table->integer('Payment_status');
+            $table->integer('transport');
             $table->timestamps();
 
             $table->foreign('service_id')->references('service_id')->

@@ -43,6 +43,12 @@ Route::view('/add_admin', 'admin/addAdmin');
 Route::view('/manage_bank', 'admin/manageBank');
 
 // route for service admin
+Route::resource('ServiceUser','Service\ServiceUserController');
+Route::resource('ServiceProfile','Service\ServiceProfileController');
+Route::resource('ServiceNotification','Service\NotificationController');
+Route::resource('ServiceNews','Service\NewsController');
+Route::resource('ServiceBill','Service\BillController');
+
 Route::view('/manage_service_user', 'service/manageUser');
 Route::view('/notifay', 'service/notifay');
 Route::view('/send_bill', 'service/send_bill');
