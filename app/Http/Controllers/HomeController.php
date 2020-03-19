@@ -40,7 +40,7 @@ class HomeController extends Controller
             foreach($d as $a)
             { 
                 session()->put('service_name',$a->service_name); 
-                session()->put('service_id',$a->service_id); 
+                session()->put('service_id',$a->id); 
             }
             return redirect('/manage_service_user');
         }
