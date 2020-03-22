@@ -15,7 +15,7 @@ class CreateSchoolsTable extends Migration
     {
         Schema::create('schools', function (Blueprint $table) { 
             $table->bigIncrements('id');
-            $table->bigInteger('user_number')->unique()->unsigned();
+            $table->string('user_number')->unique();
             $table->bigInteger('service_id')->unsigned();
             $table->string('user_name');
             $table->integer('level');
@@ -27,7 +27,7 @@ class CreateSchoolsTable extends Migration
             $table->timestamps();
 
             $table->foreign('service_id')->references('id')->
-                                on('service_lists')->onDelete('cascade');
+                                on('services')->onDelete('cascade');
         });
     }
 

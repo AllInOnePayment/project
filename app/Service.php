@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceList extends Model
+class Service extends Model
 {
-    public function mobileBankList(){
-        return $this->belongsTo('App\MobileBankList');
+    public function mobileBank(){
+        return $this->belongsTo('App\MobileBank');
     }
     public function user(){
         return $this->hasMany('App\User');
@@ -18,16 +18,13 @@ class ServiceList extends Model
     public function serviceProvider(){
         return $this->hasMany('App\ServiceProvider');
     }
-    public function newsInfo(){
-        return $this->hasMany('App\NewsInfo');
+    public function news(){
+        return $this->hasMany('App\News');
     }
     public function notification(){
         return $this->hasMany('App\Notification');
     }
-    public function history(){
-        return $this->hasMany('App\History');
-    }
-    public function registerService(){
-        return $this->hasMany('App\RegisterService');
+    public function register(){
+        return $this->hasMany('App\Register');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegisterServicesTable extends Migration
+class CreateRegistersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,20 @@ class CreateRegisterServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('register_services', function (Blueprint $table) {
+        Schema::create('registers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('student_id')->nullable()->unsigned();
-            $table->bigInteger('service_number')->nullable()->unsigned();
+            $table->bigInteger('school_id')->nullable()->unsigned();
+            $table->bigInteger('service_provider_id')->nullable()->unsigned();
             $table->bigInteger('service_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('service_id')->references('id')->on('service_lists')
+            $table->foreign('service_id')->references('id')->on('services')
             ->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('student_id')->references('id')
+            $table->foreign('school_id')->references('id')
             ->on('schools')->onDelete('cascade');
-            $table->foreign('service_number')->references('id')
+            $table->foreign('service_provider_id')->references('id')
             ->on('service_providers')->onDelete('cascade');
 
         });
@@ -39,6 +39,6 @@ class CreateRegisterServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('register_services');
+        Schema::dropIfExists('registers');
     }
 }

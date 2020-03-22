@@ -27,6 +27,7 @@ Route::get('/test', function () {
     return view('test');
 });
 Route::post('/test', 'TestsController@store');
+Route::get('/relation', 'TestsController@relation');
 
 // route for the users
 Route::view('/bill', 'users.bill');

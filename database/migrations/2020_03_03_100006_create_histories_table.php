@@ -16,7 +16,7 @@ class CreateHistoriesTable extends Migration
         Schema::create('histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('date_payment');
-            $table->bigInteger('service_id')->unsigned();
+            $table->bigInteger('register_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->integer('amount');
             $table->integer('old_balance');
@@ -25,11 +25,12 @@ class CreateHistoriesTable extends Migration
             $table->string('receipt_file');
             $table->timestamps();
 
-            $table->foreign('service_id')->references('id')->
-                                on('service_lists')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->
                                 on('users')->onDelete('cascade');
-        });
+            $table->foreign('register_id')->references('id')
+            ->on('registers')->onDelete('cascade');
+            
+            });
     }
 
     /**

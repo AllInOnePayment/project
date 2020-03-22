@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Bank;
+use App\Service;
 
 class TestsController extends Controller
 {
@@ -19,5 +21,16 @@ class TestsController extends Controller
         $data['password']= Hash::make($data['password']);
         User::create($data);
         return redirect('/');
+    }
+    public function relation(){
+        $id=1;
+       // $user=User::find($id);
+       // dd($user->bank);
+      // $bank=Bank::find($id);
+       //dd($bank->user);
+       //$service=Service::find($id);
+       //dd($service->user);
+       //dd($user->service);
+      
     }
 }

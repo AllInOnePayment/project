@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class History extends Model
+class Transaction extends Model
 {
     public function user(){
         return $this->belongsTo('App\User');
     }
-    public function register(){
-        return $this->belongsTo('App\Register');
+    public function mobileBank(){
+        return $this->belongsTo('App\MobileBank');
     }
 }

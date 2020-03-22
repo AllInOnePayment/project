@@ -15,7 +15,7 @@ class CreateServiceProviderBillsTable extends Migration
     {
         Schema::create('service_provider_bills', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('bill_id')->unique()->unsigned();
+            $table->bigInteger('register_id')->unique()->unsigned();
             $table->string('last_reading')->nullable();
             $table->string('current_reading')->nullable();
             $table->string('receipt_number');
@@ -23,8 +23,8 @@ class CreateServiceProviderBillsTable extends Migration
             $table->integer('status');
             $table->timestamps();
 
-            $table->foreign('bill_id')->references('id')->
-                                on('register_services')->onDelete('cascade');
+            $table->foreign('register_id')->references('id')->
+                                on('registers')->onDelete('cascade');
         });
     }
 

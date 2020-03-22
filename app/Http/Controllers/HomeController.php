@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
-use App\ServiceList;
+use App\Service;
 class HomeController extends Controller
 {
     /**
@@ -36,7 +36,7 @@ class HomeController extends Controller
         }
         else
         {   
-            $d=ServiceList::all()->where('id',Auth::user()->service_id);
+            $d=Service::all()->where('id',Auth::user()->service_id);
            
             foreach($d as $a)
             { 
