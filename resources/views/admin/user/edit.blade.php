@@ -30,9 +30,10 @@
 					<img class="img img-circle" style="width: 160px; height: 160px;" src="{{ asset('storage/avator/'.$user->image)}}">
 				</div>
 				<div class="col-sm-7"><br>
-					<p>Name  : <b>{{ $user->name}}</b></p>
-					<p>Phone : <b>{{ $user->phone}}</b></p>
-					<p>Email : <b>{{ $user->email}}</b></p>
+					<p>Name    : <b>{{ $user->name}}</b></p>
+					<p>Phone   : <b>{{ $user->phone}}</b></p>
+					<p>Email   : <b>{{ $user->email}}</b></p>
+					<p>Service : <b>{{ $servicename->service_name}}</b></p> 
 					<hr>
 					<a href="javascript:void(0)" 
 					onclick="$(this).parent().find('form').submit()" class="pl-3 btn btn-danger">Delete Account</a><hr>
@@ -77,13 +78,8 @@
 			<h3 class="text text-primary">Registered In</h3>
 			<div class="info-box mb-3 bg-success">
 			<span class="info-box-icon"><i class="fa fa-heart-o"></i></span>
-
-			<div class="info-box-content">
-				<ul>
-					<li>Farus School</li>
-					<li>Mebrat Corporation</li>
-				</ul>  
-			</div>
+			<h4>Farus primary School</h4>
+			<h4>AtseYohanes School</h4>
 			<!-- /.info-box-content -->
 			</div>
 		</div>

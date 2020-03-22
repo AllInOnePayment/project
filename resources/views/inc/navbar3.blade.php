@@ -17,8 +17,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
-            @else
-
+            @else 
                 @elseif (Auth::user()->service_id > 1)
                 <li class="nav-item">
                     <a class="nav-link" href="manage_service_user">manage service user</a>

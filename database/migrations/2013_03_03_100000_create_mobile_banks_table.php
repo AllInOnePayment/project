@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMobileBankListsTable extends Migration
+class CreateMobileBanksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateMobileBankListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mobile_bank_lists', function (Blueprint $table) {
+        Schema::create('mobile_banks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('bank_name');
             $table->string('http');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateMobileBankListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mobile_bank_lists');
+        Schema::dropIfExists('mobile_banks');
     }
 }

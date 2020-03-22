@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RegisterService extends Model
+class Register extends Model
 {
-    public function serviceList(){
-        return $this->belongsTo('App\ServiceList');
+    public function service(){
+        return $this->belongsTo('App\Service');
     }
     public function user(){
         return $this->belongsTo('App\User');
@@ -23,5 +23,8 @@ class RegisterService extends Model
     }
     public function serviceProviderBill(){
         return $this->hasOne('App\ServiceProviderBill');
+    }
+    public function history(){
+        return $this->hasMany('App\History');
     }
 }

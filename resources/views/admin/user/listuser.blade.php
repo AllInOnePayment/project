@@ -28,6 +28,7 @@
 				<th>Id</th>
 				<th>Name</th>
 				<th>Email</th>
+				<th>Service</th>
 				<th>Phone</th>
 				<th>More</th>
 			</tr>
@@ -36,13 +37,19 @@
 			<th>{{ $c->id }}</th>
 			<th>{{ $c->name }}</th>
 			<th>{{ $c->email }}</th>
+			<th>{{ $c->service_id}}</th>
 			<th>{{ $c->phone }}</th>
-			<th><a class="btn btn-warning" href="{{ route('admin.user.edit',$c->id)}}">Edit</a>
+		<th><a class="btn btn-warning" href="{{ route('admin.user.edit',$c->id)}}">Edit</a>
       <a class="btn btn-info" href="{{ route('admin.user.show',$c->id)}}">Detail</a>
       </th>
 		</tr>
 			@endforeach
 		</table>
+		<div class="row"><div class="col-sm-4"></div>
+		    <div class="col-sm-4">
+		    	{{ $listuser->render()}}
+		    </div><div class="col-sm-4"></div>
+	    </div>  
 	</div>	
 	
 </section>

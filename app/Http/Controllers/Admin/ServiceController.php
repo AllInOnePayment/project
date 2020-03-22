@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use App\RegisterService;
-use App\ServiceList;
+use App\Register;
+use App\Service;
+use App\MobileBank;
 
 class ServiceController extends Controller
 {
@@ -26,7 +27,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $list['servicelist'] = ServiceList::all();
+        $list['servicelist'] = Service::paginate(5);
         return view('admin.service.listservice')->with($list);
     }
 
@@ -37,7 +38,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        $mobileList = MobileBank::orderBy('bank_name')->get();
+        return view('admin.service.create')->with('mobilelist',$mobileList);
     }
 
     /**
@@ -46,15 +48,14 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, ServiceList $service)
-    { 
-        /*$service->service_id = $request->id;
+    public function store(Request $request, Service $service)
+    {  
         $service->service_name = $request->name;
         $service->http = $request->http;
-        $service->mobile_bank_id = $request->mobile;
-        $service->bank_account = $request->bank;
+        $service->mobile_bank_id = $request->mobilelist;
+        $service->bank_account = $request->account;
         $service->save();
-        return view('admin.service.index');*/
+        return redirect()->route('admin.manager.index');
     }
 
     /**
@@ -65,7 +66,8 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        //
+       $serlist = Service::all()->where('id',$id); 
+       return view('admin.service.show')->with('servicelist',$serlist); 
     }
 
     /**
@@ -74,10 +76,12 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ServiceList $service)
+    public function edit($id)
     {
-        $arr['serviceInfo'] = $service;
-        return view('admin.service.editservice')->with($arr);
+       $arr = Service::all()->where('id',$id);
+       $mobileList = MobileBank::orderBy('bank_name')->get();
+       return view('admin.service.edit')->with('serviceinfo',$arr)
+                    ->with('mobilelist',$mobileList);
     }
 
     /**
@@ -87,13 +91,12 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ServiceList $service)
-    {
-        $service->service_id = $request->id;
+    public function update(Request $request, Service $service)
+    { 
         $service->service_name = $request->name;
         $service->http = $request->http;
-        $service->mobile_bank_id = $request->mobile;
-        $service->bank_account = $request->bank;
+        $service->mobile_bank_id = $request->mobilelist;
+        $service->bank_account = $request->account;
         $service->save();
         return redirect()->route('admin.service.index');
     }

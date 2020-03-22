@@ -21,14 +21,13 @@
     <!-- /.content-header --> 
     <div class="row">
       <div class="col-sm-2"></div>
-      <div class="col-sm-8">
-          <div class="register-box">
+      <div class="col-sm-6">
+          <div>
           <div class="register-logo">
           <a href="{{route('adminhome')}}"><b>All In |</b>ONE</a>
-          </div>
-
+          </div> 
           <div class="card">
-          <div class="card-body register-card-body"> 
+          <div class="card-body"> 
 
     <form  method="post" action="{{ route('admin.user.store') }}" enctype="multipart/form-data">
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -41,7 +40,7 @@
         <span class="fa fa-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback display-flex">
-        <input type="number" name="phone" class="form-control" placeholder="Phone">
+        <input type="tel" name="phone" class="form-control" placeholder="Phone">
         <span class="fa fa-phone form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback display-flex">
@@ -53,8 +52,16 @@
         <span class="fa fa-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback display-flex">
+        <select name="serviceName" class="form-control">
+          <option>Select Service Name</option>
+          @foreach($servicelist as $sl)
+              <option value="{{ $sl->id}}">{{ $sl->service_name}}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="form-group has-feedback display-flex">
         <input type="file" name="photo">
-        <span class="fa fa-lock form-control-feedback"></span>
+        <label>Profile Photo</label>
       </div>
       <div class="col-4">
         <button type="submit" value="save" class="btn btn-primary btn-block btn-flat">Register</button>

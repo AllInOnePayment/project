@@ -27,7 +27,6 @@ Route::get('/test', function () {
     return view('test');
 });
 Route::post('/test', 'TestsController@store');
-
 // route for the users
 Route::view('/bill', 'users.bill');
 Route::view('/history', 'users.history');
@@ -37,10 +36,17 @@ Route::view('/profile', 'users.profile');
 Route::view('/register_service', 'users.registerService');
 
 // route for admin
-Route::view('/admin', 'admin/manageUser')->name('adminhome');
-Route::resource('/admin/user', 'Admin\UserController',['as'=>'admin']);
-Route::resource('/admin/bank', 'Admin\BankController',['as'=>'admin']);
-Route::resource('/admin/service', 'Admin\ServiceController',['as'=>'admin']);
+Route::view('/admin', 'admin\manageUser')->name('adminhome');
+Route::resource('/admin/user', 'Admin\UserController',
+				['as'=>'admin']);
+Route::resource('/admin/manager', 'Admin\AddmanagerController',
+				['as'=>'admin']);
+Route::get('/admin/information','Admin\InformationController@index')
+				->name('information');
+Route::resource('/admin/bank', 'Admin\BankController',
+				['as'=>'admin']);
+Route::resource('/admin/service', 'Admin\ServiceController',
+				['as'=>'admin']);
 Route::view('/manage_service', 'admin/manageService');
 Route::view('/admin/update','admin/user/update');
 Route::view('/add_admin', 'admin/addAdmin');

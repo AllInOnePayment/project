@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
 class HomeController extends Controller
 {
     /**
@@ -25,14 +24,13 @@ class HomeController extends Controller
     public function index()
     {   
         //return view('home');
-        if(Auth::user()->service_id == 0)
+        if(Auth::user()->service_id == 1)
         {
             return redirect('/main');
         }
-        elseif(Auth::user()->service_id == 1)
-        {
-            $arr['userinfo'] = Auth::user();
-            return redirect()->route('adminhome')->with($arr);
+        elseif(Auth::user()->service_id == 2)
+        {   
+           return view('admin.manageUser'); 
         }
         else
         {

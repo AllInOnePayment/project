@@ -147,7 +147,7 @@
           
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">Semere | Profile</span>
+          <span class="dropdown-item dropdown-header">{{Auth::user()->name}} | Profile</span>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <i class="fa fa-star mr-2"></i> Profile Setting 
@@ -180,7 +180,7 @@
     <a href="index3.html" class="brand-link">
       <img src="{{ asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">All In | One</span>
+      <span class="brand-text font-weight-light">AllIn<b class="text-primary">1</b> | Admin</span>
     </a>
 
     <!-- Sidebar -->
@@ -191,7 +191,7 @@
           <img src="{{ asset('dist/img/avatar.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Semere Hiluf</a>
+          <a href="{{ route('admin.user.show',Auth::user()->id)}}" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -237,7 +237,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link  
-            @if($segment=='service')
+            @if($segment=='service' || $segment=='manager')
              active
              @endif">
               <i class="nav-icon fa fa-pie-chart"></i>
@@ -254,9 +254,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="{{ route('admin.manager.index')}}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Update Service</p>
+                  <p>Add Manager</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -306,7 +306,10 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link
+            @if($segment=='information')
+             active
+             @endif">
               <i class="nav-icon fa fa-edit"></i>
               <p>
                 Information
@@ -315,15 +318,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
+                <a href="{{ route('information')}}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Users of System</p>
+                  <p>Users</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/forms/advanced.html" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Admins of Service</p>
+                  <p>Service</p>
                 </a>
               </li>
               <li class="nav-item">

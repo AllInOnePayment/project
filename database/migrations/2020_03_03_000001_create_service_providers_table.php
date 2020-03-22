@@ -15,7 +15,7 @@ class CreateServiceProvidersTable extends Migration
     {
         Schema::create('service_providers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('service_number')->unique()->unsigned();
+            $table->string('user_number')->unique();
             $table->bigInteger('service_id')->unsigned();
             $table->string('user_name');
             $table->string('addres');
@@ -23,8 +23,8 @@ class CreateServiceProvidersTable extends Migration
             $table->integer('payment_status');
             $table->timestamps();
 
-            $table->foreign('service_id')->references('service_id')->
-                                on('service_lists')->onDelete('cascade');
+            $table->foreign('service_id')->references('id')->
+                                on('services')->onDelete('cascade');
         });
     }
 

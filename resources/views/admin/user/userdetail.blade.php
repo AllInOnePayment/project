@@ -71,26 +71,12 @@
 	      </div>
 	      <div class="card-footer p-0">
 	        <ul class="nav flex-column">
-	          <li class="nav-item">
-	            <a href="#" class="nav-link">
-	              Projects <span class="float-right badge bg-primary">31</span>
-	            </a>
+	        	@foreach($registered as $r)
+	          <li class="nav-item p-2">
+	            	<h4>{{ $r->serviceList->service_name}}</h4>
+	            	 <span class="float-right badge bg-primary">31</span>
 	          </li>
-	          <li class="nav-item">
-	            <a href="#" class="nav-link">
-	              Tasks <span class="float-right badge bg-info">5</span>
-	            </a>
-	          </li>
-	          <li class="nav-item">
-	            <a href="#" class="nav-link">
-	              Completed Projects <span class="float-right badge bg-success">12</span>
-	            </a>
-	          </li>
-	          <li class="nav-item">
-	            <a href="#" class="nav-link">
-	              Followers <span class="float-right badge bg-danger">842</span>
-	            </a>
-	          </li>
+	             @endforeach
 	        </ul>
 	      </div>
 	    </div>

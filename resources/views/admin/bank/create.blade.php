@@ -2,23 +2,23 @@
 
 @section('content')
 <div class="container">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Add Mobile Banking</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('adminhome')}}">Home</a></li>
-              <li class="breadcrumb-item active"><b>Add Banking</b></li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-</div>
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Add Mobile Banking</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{ route('adminhome')}}">Home</a></li>
+            <li class="breadcrumb-item active"><b>Banking</b></li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
 
 <div class="row">
 	<div class="col-sm-1"></div>
@@ -26,13 +26,7 @@
 		<h3 class="text text-primary">All In | ONE</h3><hr>
 		<form method="post" action="{{ route('admin.bank.store')}}">
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-           <div class="row">
-           	<div class="col-sm-6">
-           		<div class="form-control">
-           			<label>Mobile Banking Id</label>
-           			<input type="text" name="bankid" class="form-control">
-           		</div>
-           	</div>
+           <div class="row"> 
            </div><hr>
            <div class="row">
            	<div class="col-sm-6">

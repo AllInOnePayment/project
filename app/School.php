@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class School extends Model
 {
-    public function serviceList(){
-        return $this->belongsTo('App\ServiceList');
+    public function service(){
+        return $this->belongsTo('App\Service');
     }
-    public function registerService(){
-        return $this->hasOne('App\RegisterService');
+    public function register(){
+        return $this->hasOne('App\Register');
     }
+
 }

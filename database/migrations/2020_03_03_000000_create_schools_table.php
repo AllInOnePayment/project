@@ -15,17 +15,19 @@ class CreateSchoolsTable extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('student_id')->unique()->unsigned();
+            $table->string('user_number')->unique();
             $table->bigInteger('service_id')->unsigned();
             $table->string('user_name');
             $table->integer('level');
+            $table->string('department');
+            $table->string('class');
             $table->integer('status');
             $table->integer('payment_status');
             $table->integer('transport');
             $table->timestamps();
 
-            $table->foreign('service_id')->references('service_id')->
-                                on('service_lists')->onDelete('cascade');
+            $table->foreign('service_id')->references('id')->
+                                on('services')->onDelete('cascade');
         });
     }
 

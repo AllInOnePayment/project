@@ -20,8 +20,8 @@ class CreateNotificationsTable extends Migration
             $table->text('notification');
             $table->timestamps();
 
-            $table->foreign('service_id')->references('service_id')->
-                                on('service_lists')->onDelete('cascade');
+            $table->foreign('service_id')->references('id')->
+                                on('services')->onDelete('cascade');
         });
     }
 

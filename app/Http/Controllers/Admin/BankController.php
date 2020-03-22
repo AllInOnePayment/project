@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use App\RegisterService;
-use App\ServiceList;
-use App\MobileBankList;
+use App\Register;
+use App\Service;
+use App\MobileBank;
 
 class BankController extends Controller
 {
@@ -27,7 +27,7 @@ class BankController extends Controller
      */
     public function index()
     {
-        $arr['banking'] = MobileBankList::all();
+        $arr['banking'] = MobileBank::paginate(4);
         return view('admin.bank.listbank')->with($arr);
     }
 
@@ -47,10 +47,10 @@ class BankController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, MobileBankList $bank)
+    public function store(Request $request, MobileBank $bank)
     {
         
-        $bank->mobile_bank_id = $request->bankid;
+        $bank->id= $request->bankid;
         $bank->bank_name = $request->bankname;
         $bank->http = $request->bankhttp;
         $bank->save();
@@ -63,9 +63,13 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(MobileBank $bank)
     {
-        //
+        $banklist = MobileBank::orderBy('bank_name')->get();
+        $whichservice = Service::all()->where('mobile_bank_id',$bank->id);
+        return view('admin.bank.show')->with('bankinfo',$bank)
+             ->with('banklist',$banklist)
+             ->with('whichservice',$whichservice);
     }
 
     /**
@@ -76,8 +80,8 @@ class BankController extends Controller
      */
     public function edit($id)
     {
-        $arr['bankinfo'] = MobileBankList::all()->
-                            where('mobile_bank_id',$id);
+        $arr['bankinfo'] = MobileBank::all()->
+                            where('id',$id);
         return view('admin.bank.edit')->with($arr);
     }
 
@@ -88,9 +92,13 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, MobileBank $bank)
     {
-        //
+        $bank->id= $request->id;
+        $bank->bank_name = $request->name;
+        $bank->http = $request->http;
+        $bank->save();
+        return redirect()->route('admin.bank.index');
     }
 
     /**

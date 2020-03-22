@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">System Management | <b>Semere</b> </h1>
+            <h1 class="m-0 text-dark">System Management | <b>{{$userinfo->name}}</b> </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -29,7 +29,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>350</h3>
+                <h3>{{$uc}}</h3>
 
                 <p>Active <b>Users</b></p>
               </div>
@@ -43,7 +43,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>245</h3>
+                <h3>{{$rc}}</h3>
 
                 <p><b>Registered</b> in Service</p>
               </div>
@@ -57,7 +57,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>48</h3>
+                <h3>{{ $sc }}</h3>
 
                 <p><b>Services</b> On Our System</p>
               </div>
@@ -71,7 +71,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>58</h3>
+                <h3>{{ $hc }}</h3>
 
                 <p><b>Transactions</b> Daily</p>
               </div>

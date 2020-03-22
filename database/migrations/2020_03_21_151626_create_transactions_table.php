@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHistoriesTable extends Migration
+class CreateTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,17 @@ class CreateHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('histories', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('date_payment');
-            $table->bigInteger('register_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->integer('amount');
-            $table->integer('old_balance');
-            $table->integer('current_balance');
-            $table->bigInteger('receipt_number');
-            $table->string('receipt_file');
+            $table->bigInteger('mobile_bank_id')->unsigned();
+            $table->bigInteger('amount');
             $table->timestamps();
-    
-            $table->foreign('register_id')->references('id')->
-                                on('registers')->onDelete('cascade');
+
             $table->foreign('user_id')->references('id')->
                                 on('users')->onDelete('cascade');
+            $table->foreign('mobile_bank_id')->references('id')->
+                                on('mobile_banks')->onDelete('cascade');
         });
     }
 
@@ -39,6 +34,6 @@ class CreateHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('histories');
+        Schema::dropIfExists('transactions');
     }
 }

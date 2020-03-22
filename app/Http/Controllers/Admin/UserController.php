@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use Illuminate\Support\Collection;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use App\RegisterService;
-use App\ServiceList;
+use App\Register;
+use App\Service;
+use App\history;
 
 class UserController extends Controller
 {
@@ -26,9 +28,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $id=0;
-        $arr['listuser'] = User::all()->where('service_id',$id);
-        return view('admin.user.listuser')->with($arr);
+        $user['listuser'] = User::paginate(5); 
+        return view('admin.user.listuser')->with($user);
     }
     /*public function index2()
     {
@@ -42,7 +43,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $serList = Service::orderBy('service_name')->get();
+        return view('admin.user.create')->with('servicelist',$serList);
     }
 
     /**
@@ -67,7 +69,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;        
-        $user->service_id = 0;
+        $user->service_id = $request->serviceName;
         $user->password = $request->pass;
         $user->save();
         return redirect()->route('admin.user.index');
@@ -81,10 +83,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //$arr2['detail'] = User->RegisterService->ServiceList::all();
-        $arr['user'] = User::find($id);
-        //$arr->service = $serviceName;
-        return view('admin.user.userdetail')->with($arr);
+        $user = User::find($id);
+        $hey = $user->register;
+        return view('admin.user.userdetail')->with('user',$user)->
+             with('registered',$hey);
     }
 
     /**
@@ -94,9 +96,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-    {
+    {   
         $arr['user'] = $user;
-        return view('admin.user.edit')->with($arr); 
+        $sername = Service::find($user->service_id); 
+        return view('admin.user.edit')->with($arr)->with('servicename',$sername);    
     }
 
     /**

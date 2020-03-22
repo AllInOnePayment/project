@@ -24,8 +24,8 @@ class CreateSchoolBillsTable extends Migration
             $table->integer('status');
             $table->timestamps();
 
-            $table->foreign('bill_id')->references('bill_id')->
-                                on('register_services')->onDelete('cascade');
+            $table->foreign('bill_id')->references('id')->
+                                on('registers')->onDelete('cascade');
         });
     }
 

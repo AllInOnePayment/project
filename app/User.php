@@ -37,16 +37,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function serviceList(){
-        return $this->belongsTo('App\ServiceList');
+    public function service(){
+        return $this->belongsTo('App\Service');
     }
     public function bank(){
         return $this->hasOne('App\Bank');
     }
-    public function registerService(){
-        return $this->hasMany('App\RegisterService');
+    public function register(){
+        return $this->hasMany('App\Register');
     }
     public function history(){
         return $this->hasMany('App\History');
+    }
+
+    public function transaction()
+    {
+        return $this->hasMany('App\Transaction');
+    }
+    public function sms()
+    {
+        return $this->hasMany('App\Sms');
     }
 }

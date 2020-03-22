@@ -33,15 +33,21 @@
 			</tr>
 			@foreach( $banking as $c)
 		<tr>
-			<th>{{ $c->mobile_bank_id }}</th>
+			<th>{{ $c->id }}</th>
 			<th>{{ $c->bank_name }}</th>
 			<th>{{ $c->http }}</th>
-			<th><a class="btn btn-warning" href="{{ route('admin.bank.edit',$c->mobile_bank_id)}}">Edit</a>
-      <a class="btn btn-info" href="{{ route('admin.bank.show',$c->mobile_bank_id)}}">Detail</a>
+			<th><a class="btn btn-warning" href="{{ route('admin.bank.edit',$c->id)}}">Edit</a>
+      <a class="btn btn-info" href="{{ route('admin.bank.show',$c->id)}}">Detail</a>
       </th>
 		</tr>
 			@endforeach
 		</table>
+
+        <div class="row"><div class="col-sm-4"></div>
+            <div class="col-sm-4"> 
+                    {{ $banking->render()}} 
+            </div><div class="col-sm-4"></div>
+        </div> 
 	</div>	
 	
 </section>
