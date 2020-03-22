@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServiceListsTable extends Migration
+class CreateServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateServiceListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_lists', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('service_name');
             $table->string('http')->nullable();
@@ -23,7 +23,7 @@ class CreateServiceListsTable extends Migration
             $table->timestamps();
 
             $table->foreign('mobile_bank_id')->references('id')->
-                                on('mobile_bank_lists')->onDelete('cascade');
+                                on('mobile_banks')->onDelete('cascade');
         });
     }
 
@@ -34,6 +34,6 @@ class CreateServiceListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_lists');
+        Schema::dropIfExists('services');
     }
 }

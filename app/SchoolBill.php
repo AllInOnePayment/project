@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SchoolBill extends Model
 {
-    public function registerService(){
-        return $this->belongsTo('App\RegisterService');
+    public function register(){
+        return $this->belongsTo('App\Register');
     }
 }

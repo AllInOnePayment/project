@@ -15,7 +15,7 @@ class CreateSchoolBillsTable extends Migration
     {
         Schema::create('school_bills', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('bill_id')->unique()->unsigned();
+            $table->bigInteger('register_id')->unique()->unsigned();
             $table->integer('school_bill');
             $table->integer('transport_bill')->nullable();
             $table->integer('other_bill')->nullable();
@@ -24,8 +24,8 @@ class CreateSchoolBillsTable extends Migration
             $table->integer('status');
             $table->timestamps();
 
-            $table->foreign('bill_id')->references('id')->
-                                on('register_services')->onDelete('cascade');
+            $table->foreign('register_id')->references('id')->
+                                on('registers')->onDelete('cascade');
          });
     }
 

@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ServiceListTableSeeder extends Seeder
+class ServiceTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,10 +12,10 @@ class ServiceListTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('service_lists')->insert([
+        DB::table('services')->insert([
             'service_name'=>'AllInOneUser'
         ]);
-        DB::table('service_lists')->insert([
+        DB::table('services')->insert([
             'service_name'=>'AllInOneAdmin'
         ]);
     }

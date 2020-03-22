@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
-    public function serviceList(){
-        return $this->belongsTo('App\ServiceList');
+    public function service(){
+        return $this->belongsTo('App\Service');
     }
     
 }

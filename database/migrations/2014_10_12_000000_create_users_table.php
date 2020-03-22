@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             $table->foreign('service_id')->references('id')->
-                                on('service_lists')->onDelete('cascade');
+                                on('services')->onDelete('cascade');
           });
 
     }
