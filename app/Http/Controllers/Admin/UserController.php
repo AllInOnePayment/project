@@ -9,7 +9,7 @@ use App\User;
 use App\Register;
 use App\Service;
 use App\history;
-
+use App\MobileBank;
 class UserController extends Controller
 {
     /**
@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user['listuser'] = User::paginate(5); 
+        $user['listuser'] = User::where('service_id',1)->paginate(5); 
         return view('admin.user.listuser')->with($user);
     }
     /*public function index2()
@@ -84,9 +84,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $hey = $user->register;
-        return view('admin.user.userdetail')->with('user',$user)->
-             with('registered',$hey);
+        $bank = MobileBank::all();
+        return view('admin.user.userdetail')->with('user',$user)
+                    ->with('bank',$bank);
     }
 
     /**

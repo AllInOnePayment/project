@@ -4,6 +4,23 @@
 
 <section class="container-fluid"><br>
 
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-primary"><b>User Edit</b></h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{ route('adminhome')}}">Home</a></li>
+            <li class="breadcrumb-item active"><b>User|Edit</b></li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
 	<div class="row">
 		<div class="col-sm-1"></div>
 		<div class="col-sm-5">
@@ -71,34 +88,7 @@
         </div>
     </form>
 		</div>
-	</div><br><hr>
-	<div class="row">
-		<div class="col-sm-1"></div>
-		<div class="col-sm-5">
-			<h3 class="text text-primary">Registered In</h3>
-			<div class="info-box mb-3 bg-success">
-			<span class="info-box-icon"><i class="fa fa-heart-o"></i></span>
-			<h4>Farus primary School</h4>
-			<h4>AtseYohanes School</h4>
-			<!-- /.info-box-content -->
-			</div>
-		</div>
-		<div class="col-sm-6">
-			<h3 class="text-primary">Payment In</h3>
-			<div class="info-box mb-3 bg-warning">
-			<span class="info-box-icon"><i class="fa fa-heart-o"></i></span>
-
-			<div class="info-box-content">
-				<ul>
-				   <li>HelloCash</li>
-				   <li>CBE</li>
-			    </ul>  
-			</div>
-			<!-- /.info-box-content -->
-			</div>
-			
-		</div>
-	</div>
+	</div><br><hr> 
 </section>
 
 @endsection

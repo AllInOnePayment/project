@@ -43,6 +43,8 @@ Route::resource('/admin/manager', 'Admin\AddmanagerController',
 				['as'=>'admin']);
 Route::get('/admin/information','Admin\InformationController@index')
 				->name('information');
+Route::get('/admin/systeminfo','Admin\InformationController@index2')
+				->name('systeminfo');
 Route::resource('/admin/bank', 'Admin\BankController',
 				['as'=>'admin']);
 Route::resource('/admin/service', 'Admin\ServiceController',

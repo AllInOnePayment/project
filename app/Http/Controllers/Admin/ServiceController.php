@@ -27,7 +27,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $list['servicelist'] = Service::paginate(5);
+        $list['servicelist'] = Service::where('id','>=',3)
+                    ->paginate(5);
         return view('admin.service.listservice')->with($list);
     }
 
@@ -109,6 +110,7 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Service::destroy($id);
+        return redirect()->route('admin.service.index'); 
     }
 }

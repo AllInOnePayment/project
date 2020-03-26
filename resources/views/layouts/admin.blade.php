@@ -42,17 +42,6 @@
       </li>
     </ul>
 
-    <!-- SEARCH FORM -->
-    <!-- <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form> -->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -208,7 +197,7 @@
             @if($segment=='user')
              active
              @endif">
-              <i class="nav-icon fa fa-dashboard"></i>
+              <i class="nav-icon fa fa-user-circle"></i>
               <p>
                 User Management
                 <i class="right fa fa-angle-left"></i>
@@ -219,12 +208,6 @@
                 <a href="{{ route('admin.user.index')}}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>View List</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('admin.user.index')}}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Update User</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -310,7 +293,7 @@
             @if($segment=='information')
              active
              @endif">
-              <i class="nav-icon fa fa-edit"></i>
+              <i class="nav-icon fa fa-info-circle"></i>
               <p>
                 Information
                 <i class="fa fa-angle-left right"></i>
@@ -324,7 +307,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
+                <a href="{{ route('systeminfo')}}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Service</p>
                 </a>

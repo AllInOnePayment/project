@@ -17,9 +17,9 @@ class AddmanagerController extends Controller
      */
     public function index()
     {
-        $service = Service::select('service_name')->get();
-        return view('admin.service.addmanager')
-            ->with('servicelist',$service);
+        $managers = User::where('service_id','>=',3)->paginate(10);
+        return view('admin.service.listmanager')
+            ->with('managers',$managers);
     }
 
     /**
@@ -40,12 +40,12 @@ class AddmanagerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, User $user)
-    {
+    {  
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;        
         $user->service_id = $request->service;
-        $user->password = $request->password;
+        $user->password = $request->pass;
         $user->save();
         return redirect()->route('admin.manager.index');
     }
@@ -58,7 +58,9 @@ class AddmanagerController extends Controller
      */
     public function show($id)
     {
-        //
+        $manager = User::find($id);
+        return view('admin.service.showmanager')
+            ->with('managers',$manager);
     }
 
     /**
@@ -69,7 +71,11 @@ class AddmanagerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $manager = User::find($id);
+        $service = Service::all(); 
+        return view('admin.service.editmanager')
+            ->with('managers',$manager)
+            ->with('service',$service);
     }
 
     /**
@@ -81,7 +87,14 @@ class AddmanagerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;        
+        $user->service_id = $request->service;
+        $user->password = $request->pass;
+        $user->save();
+        return redirect()->route('admin.manager.index');
     }
 
     /**

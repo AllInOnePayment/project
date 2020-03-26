@@ -62,7 +62,7 @@
             <div class="col-sm-6">
               <div class="form-control">
                 <label>Manager Password</label>
-                <input type="Password" name="password" class="form-control">
+                <input type="Password" name="pass" class="form-control">
               </div>
             </div>
             </div>

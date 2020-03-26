@@ -65,18 +65,27 @@
 	    <!-- Widget: user widget style 2 -->
 	    <div class="card card-widget widget-user-2">
 	      <!-- Add the bg color to the header using any of the bg-* classes -->
-	      <div class="widget-user-header bg-warning">
+	      <div class="widget-user-header bg-primary">
 	        
-	        <h5 class="widget-user-desc text-primary"><b>Registered In</b></h5>
+	        <h5 class="widget-user-desc text-white"><b>Registered In</b></h5>
 	      </div>
 	      <div class="card-footer p-0">
 	        <ul class="nav flex-column">
-	        	@foreach($registered as $r)
-	          <li class="nav-item p-2">
-	            	<h4>{{ $r->serviceList->service_name}}</h4>
-	            	 <span class="float-right badge bg-primary">31</span>
-	          </li>
-	             @endforeach
+	        	@if(count($user->register)>0)
+		        	@foreach($user->register as $r)
+		        	<li class="nav-item">
+			            <a href="#" class="nav-link"><b>
+			              {{ $r->service->service_name}}</b> <span class="float-right badge bg-primary">{{ $r->service->id}}</span>
+			            </a>
+		            </li>
+		            @endforeach
+	            @else
+				<li class="nav-item">
+		            <a href="#" class="nav-link"><b>
+		              Not Registered in any service</b> <span class="float-right badge bg-danger">No</span>
+		            </a>
+	            </li>	
+	            @endif  
 	        </ul>
 	      </div>
 	    </div>
@@ -91,32 +100,19 @@
 	    <!-- Widget: user widget style 2 -->
 	    <div class="card card-widget widget-user-2">
 	      <!-- Add the bg color to the header using any of the bg-* classes -->
-	      <div class="widget-user-header bg-warning">
+	      <div class="widget-user-header bg-primary">
 	        
-	        <h5 class="widget-user-desc text-primary"><b>Payment</b></h5>
+	        <h5 class="widget-user-desc text-white"><b>Payment</b></h5>
 	      </div>
 	      <div class="card-footer p-0">
 	        <ul class="nav flex-column">
+	          @foreach($bank as $b)	
 	          <li class="nav-item">
 	            <a href="#" class="nav-link">
-	              Projects <span class="float-right badge bg-primary">31</span>
+	              {{$b->bank_name}} <span class="float-right badge bg-primary">{{$b->id}}</span>
 	            </a>
 	          </li>
-	          <li class="nav-item">
-	            <a href="#" class="nav-link">
-	              Tasks <span class="float-right badge bg-info">5</span>
-	            </a>
-	          </li>
-	          <li class="nav-item">
-	            <a href="#" class="nav-link">
-	              Completed Projects <span class="float-right badge bg-success">12</span>
-	            </a>
-	          </li>
-	          <li class="nav-item">
-	            <a href="#" class="nav-link">
-	              Followers <span class="float-right badge bg-danger">842</span>
-	            </a>
-	          </li>
+	          @endforeach
 	        </ul>
 	      </div>
 	    </div>
@@ -128,32 +124,27 @@
 	    <!-- Widget: user widget style 2 -->
 	    <div class="card card-widget widget-user-2">
 	      <!-- Add the bg color to the header using any of the bg-* classes -->
-	      <div class="widget-user-header bg-warning">
+	      <div class="widget-user-header bg-primary">
 	        
-	        <h5 class="widget-user-desc text-primary"><b>Activities</b></h5>
+	        <h5 class="widget-user-desc text-white"><b>Transaction</b></h5>
 	      </div>
 	      <div class="card-footer p-0">
 	        <ul class="nav flex-column">
+	    @if(count($user->transaction)>0 && $user->transaction)<5)
+	        @foreach($user->transaction as $t)      	
 	          <li class="nav-item">
 	            <a href="#" class="nav-link">
-	              Projects <span class="float-right badge bg-primary">31</span>
+	              {{$t->mobileBank->bank_name}} <span class="float-right badge bg-primary">{{$t->amount}}</span>
 	            </a>
 	          </li>
+	        @endforeach
+	    @else  
 	          <li class="nav-item">
 	            <a href="#" class="nav-link">
-	              Tasks <span class="float-right badge bg-info">5</span>
+	              No Transactions have been made <span class="float-right badge bg-info">5</span>
 	            </a>
 	          </li>
-	          <li class="nav-item">
-	            <a href="#" class="nav-link">
-	              Completed Projects <span class="float-right badge bg-success">12</span>
-	            </a>
-	          </li>
-	          <li class="nav-item">
-	            <a href="#" class="nav-link">
-	              Followers <span class="float-right badge bg-danger">842</span>
-	            </a>
-	          </li>
+	    @endif     
 	        </ul>
 	      </div>
 	    </div>
