@@ -3,92 +3,82 @@
 namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\User;
 
 class ServiceProfileController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
+    function index(){
+        return view('service.profile.index');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    function edit(){
+        $err_pass="";
+        return view('service.profile.edit',['err_pass'=>$err_pass]);
     }
+    function picture(Request $request){
+        $this->validate($request,[
+            'img' => 'required|image|max:1999'
+        ]);
+        $filenameWithExt=$request->file('img')->getClientOriginalName();
+        $filename=pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension=$request->file('img')->getClientOriginalExtension();
+        $filenameToStore=$filename.'_'.time().'.'.$extension;
+        $path=$request->file('img')->storeAs('public/image',$filenameToStore);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $uid=Auth::user()->id;
+        $user=User::find($uid);   
+        $user->image=$filenameToStore;
+        $user->save();
+        return redirect()->route('ServiceProfile');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    function info(Request $request){
+        $this->validate($request,[
+            'name' => 'required|string',
+            'emall' => 'required|email',
+            'phone' => 'required|regex:/^(09)[0-9]{8}$/'
+        ]);
+        $uid=Auth::user()->id;
+        $user=User::find($uid);   
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->phone=$request->phone;
+        $user->save();
+       
+        return redirect()->route('ServiceProfile.edit');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return view('service.profile.show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return view('service.profile.edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    function password(Request $request){
+        $new_pass="";
+        $current_pass="";
+        $conform_pass="";
+        $uid=Auth::user()->id;
+        $user=User::find($uid); 
+        
+        
+        if(Hash::check($request->current_password, $user->password)){
+            
+            if(strlen($request->new_password)>=8){
+                if($request->new_password==$request->conform_password){
+                    $user->password=Hash::make($request->new_password);
+                }else{
+                    $conform_pass="the password must match";
+                }
+            }else{
+                $new_pass="the password must have greater or equal to 8 character";
+            }
+            
+        }else{
+            $current_pass="incorrect password";
+        }  
+        
+        $user->save();
+        $err_pass=array(
+            'current_pass'=>$current_pass,
+            'new_pass'=>$new_pass,
+            'conform_pass'=>$conform_pass
+        );
+        
+        return view('service.profile.edit',['err_pass'=>$err_pass]);
+    } 
 }

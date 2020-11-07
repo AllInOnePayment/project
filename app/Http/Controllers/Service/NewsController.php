@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\News;
 
 class NewsController extends Controller
 {
@@ -22,8 +23,9 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('service.news.index');
+    {   $news=News::all()->where('service_id',session()->get('service_id'));
+        $index=0;
+        return view('service.news.index',['news'=>$news,'index'=>$index]);
     }
 
     /**
@@ -33,7 +35,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('service.news,create');
+        return view('service.news.create');
     }
 
     /**
@@ -43,8 +45,17 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    { //dd($request->input('title'));
+        //dd(date('Y-m-d'));
+        $news=new News();
+        $news->service_id=session()->get('service_id');
+        $news->title=$request->input('title');
+        $news->news=$request->input('body');
+        $news->start_date=date('Y-m-d');
+        $news->expire_date=$request->input('expire');
+        $news->save();
+        
+        return redirect()->route('ServiceNews.index');
     }
 
     /**
@@ -55,7 +66,8 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        return view('service.news.show');
+        $news=News::find($id);
+        return view('service.news.show',['news'=>$news]);
     }
 
     /**
@@ -65,8 +77,9 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        return view('service.news.edit');
+    {   
+        $news=News::find($id);
+        return view('service.news.edit',['news'=>$news]);
     }
 
     /**
@@ -77,8 +90,14 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $news=News::find($id);
+        $news->service_id=session()->get('service_id');
+        $news->title=$request->title;
+        $news->news=$request->body;
+        $news->save();
+
+        return redirect()->route('ServiceNews.index');
     }
 
     /**
@@ -89,6 +108,7 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        News::destroy($id);
+        return redirect()->route('ServiceNews.index');
     }
 }

@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\ServiceProvider;
+use App\School;
+use App\SchoolBill;
+use App\ServiceProviderBill;
+use App\Register;
 class BillController extends Controller
 {
     /**
@@ -23,7 +27,21 @@ class BillController extends Controller
      */
     public function index()
     {
-        return view('service.bill.index');
+        $sid=session()->get('service_id');
+        $index=0;
+        if($sid==3 || $sid==4 || $sid==5)
+        {
+              //$data=DB::table('service_providers')->whereService_idAndStatus($sid, 0)->get();
+              $data=ServiceProvider::all()->where('service_id',$sid)->where('status',1);
+              
+            
+        }
+        else{
+            //$data=DB::table('schools')->whereService_idAndStatus($sid, 0)->get();
+            $data=School::all()->where('service_id',$sid)->where('status',1);
+            
+        }
+        return view('service.bill.index',['data'=>$data,'index'=>$index]);
     }
 
     /**
@@ -31,9 +49,20 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('service.bill.create');
+    public function create(Request $request)
+    {  // dd($request->input('id'));
+        $sid=session()->get('service_id');
+        if($sid==3 || $sid==4 || $sid==5)
+        {
+            $data=ServiceProvider::find($request->input('id'));
+              //$data=ServiceProvider::all()->where('service_id',$sid)->where('status',1);
+              }
+        else{
+            $data=School::find($request->input('id'));
+             //$data=School::all()->where('service_id',$sid)->where('status',1);
+            
+        }
+        return view('service.bill.create',['data'=>$data]);
     }
 
     /**
@@ -44,7 +73,47 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sid=session()->get('service_id');
+        
+        if($sid==3 || $sid==4 || $sid==5)
+        {
+            $user=ServiceProvider::find($request->id);
+
+            $bill=new ServiceProviderbill;
+            $bill->register_id=$user->register->id;
+            $bill->last_reading=$request->last_reading;
+            $bill->current_reading=$request->current_reading;
+            $bill->receipt_number=$request->receipt_number;
+            $bill->bill_amount=$request->bill_amount;
+            $bill->status=$request->payment_status;
+            
+            $dataid=$bill->register->serviceProvider->id;
+            $data=ServiceProvider::find($dataid);
+            $data->payment_status=$request->payment_status;
+            $data->save();
+            $bill->save();
+        }
+        else{
+            $user=School::find($request->id);
+            
+            $bill=new SchoolBill;
+            $bill->register_id=$user->register->id;
+            $bill->school_bill=$request->school_bill;
+            $bill->other_bill=$request->other_bill;
+            $bill->receipt_number=$request->receipt_number;
+            $bill->total_amount=$request->total_amount;
+            $bill->status=$request->payment_status;
+            if ($request->transport_bill) {
+                $bill->transport_bill=$request->transport_bill;
+            }
+            
+            $dataid=$bill->register->school->id;
+            $data=School::find($dataid);
+            $data->payment_status=$request->payment_status;
+            $data->save();
+            $bill->save();
+            }
+        return redirect()->route('ServiceBill.index');
     }
 
     /**
@@ -55,7 +124,17 @@ class BillController extends Controller
      */
     public function show($id)
     {
-        return view('service.bill.show');
+        $sid=session()->get('service_id');
+        if($sid==3 || $sid==4 || $sid==5)
+        {
+              $data=ServiceProvider::find($id);
+        }
+        else{
+             $data=School::find($id);
+           
+            }
+        
+        return view('service.bill.show',['data'=>$data]);
     }
 
     /**
@@ -66,7 +145,18 @@ class BillController extends Controller
      */
     public function edit($id)
     {
-        return view('service.bill.edit');
+        $sid=session()->get('service_id');
+        if($sid==3 || $sid==4 || $sid==5)
+        {
+              $data=ServiceProvider::find($id);
+              
+        }
+        else{
+             $data=School::find($id);
+             
+            }
+        
+        return view('service.bill.edit',['data'=>$data]);
     }
 
     /**
@@ -77,8 +167,47 @@ class BillController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $sid=session()->get('service_id');
+        if($sid==3 || $sid==4 || $sid==5)
+        {
+            $bill=ServiceProviderbill::find($id);
+            $bill->last_reading=$request->last_reading;
+            $bill->current_reading=$request->current_reading;
+            $bill->receipt_number=$request->receipt_number;
+            $bill->bill_amount=$request->bill_amount;
+
+            $dataid=$bill->register->serviceProvider->id;
+           
+            /*$bill->status=$request->payment_status;
+            
+            $dataid=$bill->register->serviceProvider->id;
+            $data=ServiceProvider::find($dataid);
+            $data->payment_status=$request->payment_status;
+            $data->save();*/
+            $bill->save();
+        }
+        else{
+            $bill=SchoolBill::find($id);
+            $bill->school_bill=$request->school_bill;
+            $bill->other_bill=$request->other_bill;
+            $bill->receipt_number=$request->receipt_number;
+            $bill->total_amount=$request->total_amount;
+            if ($request->transport_bill) {
+                $bill->transport_bill=$request->transport_bill;
+            }
+            $dataid=$bill->register->school->id;
+            
+            /*$bill->status=$request->payment_status;
+            
+            $dataid=$bill->register->school->id;
+            $data=School::find($dataid);
+            $data->payment_status=$request->payment_status;
+            $data->save();*/
+            $bill->save();
+            }
+           
+        return redirect()->route('ServiceBill.show',$dataid);
     }
 
     /**
@@ -90,5 +219,32 @@ class BillController extends Controller
     public function destroy($id)
     {
         //
+        
+        $sid=session()->get('service_id');
+        if($sid==3 || $sid==4 || $sid==5)
+        {
+            $data=ServiceProvider::find($id);
+            $billid=$data->register->serviceProviderBill->id;
+            $bill=ServiceProviderbill::find($billid);
+            $bill->last_reading=0;
+            $bill->current_reading=0;
+            $bill->receipt_number=0;
+            $bill->bill_amount=0;
+            $bill->save();
+
+        }
+        else{
+            $data=School::find($id);
+            $billid=$data->register->schoolBill->id;
+            $bill=SchoolBill::find($billid);
+            $bill->school_bill=0;
+            $bill->other_bill=0;
+            $bill->receipt_number=0;
+            $bill->total_amount=0;
+            $bill->save();
+        }
+        
+
+        return redirect()->route('ServiceBill.show',$id);
     }
 }

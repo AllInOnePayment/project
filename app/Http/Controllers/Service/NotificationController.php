@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Notification;
 
 class NotificationController extends Controller
 {
@@ -21,9 +22,40 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('service.notification.index');
+        if ($request->input('date')) {
+            dd($request->input('date'));
+        }
+        // if (false) {
+        //     $tDate=date('d');
+        //     $paymentDate=5;
+        //     $startDate=(($paymentDate-5) % 30);
+        //     $dayLeft=$paymentDate-$tDate;
+        //     if ($tDate<$paymentDate && $tDate>$startDate) {
+        //         $notification=new Notification();
+        //         $notification->service_id=session()->get('service_id');
+        //         $notification->title="Payment is soon";
+        //         $notification->notification="$dayLeft days left for payment";
+        //         $notification->save();
+        //     }elseif ($tDate==$paymentDate) {
+        //         $notification=new Notification();
+        //         $notification->service_id=session()->get('service_id');
+        //         $notification->title="Payment Day";
+        //         $notification->notification="Dear customer, it is a payment day, pay your bill";
+        //         $notification->save();
+        //     }elseif ($tDate==($paymentDate+8)%30) {
+        //         $notification=new Notification();
+        //         $notification->service_id=session()->get('service_id');
+        //         $notification->title="Payment Day finished";
+        //         $notification->notification="Dear customer, contact your service provider and pay your penality";
+        //         $notification->save();
+        //     }
+        // }
+        
+        $notification=Notification::all()->where('service_id',session()->get('service_id'));
+        $index=0;
+        return view('service.notification.index',['notification'=>$notification,'index'=>$index]);
     }
 
     /**
@@ -44,7 +76,13 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $notification=new Notification();
+        $notification->service_id=session()->get('service_id');
+        $notification->title=$request->input('title');
+        $notification->notification=$request->input('body');
+        $notification->save();
+        
+        return redirect()->route('ServiceNotification.index');
     }
 
     /**
@@ -55,7 +93,8 @@ class NotificationController extends Controller
      */
     public function show($id)
     {
-        return view('service.notification.show');
+        $notification=Notification::find($id);
+        return view('service.notification.show',['notification'=>$notification]);
     }
 
     /**
@@ -66,7 +105,8 @@ class NotificationController extends Controller
      */
     public function edit($id)
     {
-        return view('service.notification.edit');
+        $notification=Notification::find($id);
+        return view('service.notification.edit',['notification'=>$notification]);
     }
 
     /**
@@ -78,7 +118,13 @@ class NotificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $notification=Notification::find($id);
+        $notification->service_id=session()->get('service_id');
+        $notification->title=$request->input('title');
+        $notification->notification=$request->input('body');
+        $notification->save();
+        
+        return redirect()->route('ServiceNotification.index');
     }
 
     /**
@@ -89,6 +135,7 @@ class NotificationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Notification::destroy($id);
+        return redirect()->route('ServiceNotification.index');
     }
 }

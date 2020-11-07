@@ -45,10 +45,16 @@ Route::view('/manage_bank', 'admin/manageBank');
 
 // route for service admin
 Route::resource('ServiceUser','Service\ServiceUserController');
-Route::resource('ServiceProfile','Service\ServiceProfileController');
 Route::resource('ServiceNotification','Service\NotificationController');
 Route::resource('ServiceNews','Service\NewsController');
 Route::resource('ServiceBill','Service\BillController');
+Route::get('service/ServiceProfile/index','Service\ServiceProfileController@index')->name('ServiceProfile');
+Route::get('service/ServiceProfile/edit','Service\ServiceProfileController@edit')->name('ServiceProfile.edit');
+Route::post('service/ServiceProfile/picture','Service\ServiceProfileController@picture')->name('ServiceProfile.picture');
+Route::post('service/ServiceProfile/password','Service\ServiceProfileController@password')->name('ServiceProfile.password');
+Route::post('service/ServiceProfile/info','Service\ServiceProfileController@info')->name('ServiceProfile.info');
+Route::post('service/ImportExcel','service\ImportExcelController@import_user')->name('ImportUser');
+Route::post('service/Filter','service\FilterController@index')->name('Filter');
 
 Route::view('/manage_service_user', 'service/manageUser');
 Route::view('/notifay', 'service/notifay');
