@@ -25,7 +25,7 @@
             <table class="table " >
                 <tr>
                     <td>Select File</td>
-                    <td><input type="file" name="select_user"></td>
+                    <td><input type="file" name="users"></td>
                     <td><input type="submit" name="upload" value="upload"></td>
                 </tr>
             </table>
@@ -34,54 +34,54 @@
     <div class="container-fluid">
 
         <h2 align="center">Register new user</h2>
-        <div class="card">
+        <div class="card col-sm-7">
                 <form action="{{route('ServiceUser.store')}}" method="POST">
                 @csrf 
                 <div class="form-group"></div>
                 <div class="form-group">
-                    <label for="user_number" class="col-sm-2">user number:</label>
-                    <input type="text" name="user_number" class="col-sm-3" value="" required>
-                </div>
+                    <label for="user_number" class="col-sm-3">user number:</label>
+                    <input type="text" name="user_number" class="col-sm-5 " value="" required>
+                </div><br>
                 <div class="form-group">
-                    <label for="user_name" class="col-sm-2">user name :</label>
-                    <input type="text" name="user_name" class="col-sm-3" value="" required>
-                </div>
+                    <label for="user_name" class="col-sm-3">user name :</label>
+                    <input type="text" name="user_name" class="col-sm-5" value="" required>
+                </div><br>
                 
                 @if(session()->get('service_id')>5)
                 <div class="form-group">
-                    <label for="level" class="col-sm-2">grade : </label>
-                    <input type="number" min=-2 max=12 name="level" class="col-sm-3" value="" required>
-                </div>
+                    <label for="level" class="col-sm-3">grade : </label>
+                    <input type="number" min=-2 max=12 name="level" class="col-sm-2 " value="" required>
+                </div><br>
                 <div class="form-group">
-                    <label for="department" class="col-sm-2">department : </label>
-                    <select name="department" class="col-sm-3">
+                    <label for="department" class="col-sm-3">department : </label>
+                    <select name="department" class="col-sm-2">
                         <option value="natural" >natural</option>
                         <option value="social" >social</option>
                     </select>
-                </div>
+                </div><br>
                 <div class="form-group">
-                    <label for="class" class="col-sm-2">class : </label>
-                    <select name="class" class="col-sm-3">
+                    <label for="class" class="col-sm-3">class : </label>
+                    <select name="class" class="col-sm-2">
                         <option value="A" >A</option>
                         <option value="B" >B</option>
                         <option value="C" >C</option>
                         <option value="D" >D</option>
                         <option value="E" >E</option>
                     </select>
-                </div>
+                </div><br>
                 <div class="form-group">
-                    <label for="transport" class="col-sm-2">transport : </label>
+                    <label for="transport" class="col-sm-3">transport : </label>
                     <select name="transport" class="col-sm-3">
                         <option value=0 > does not use transport</option>
                         <option value=1 > transport user </option>
                     </select>
                     
-                </div>
+                </div><br>
                 @else
                 <div class="form-group">
-                    <label for="addres" class="col-sm-2">user addres : </label>
-                    <input type="text" name="addres" class="col-sm-3" value="" required>
-                </div>
+                    <label for="addres" class="col-sm-3">user addres : </label>
+                    <input type="text" name="addres" class="col-sm-5" value="" required>
+                </div><br>
                 
                 @endif
                 {{-- <div class="form-group">

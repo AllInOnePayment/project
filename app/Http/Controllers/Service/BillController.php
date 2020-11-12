@@ -85,7 +85,7 @@ class BillController extends Controller
             $bill->current_reading=$request->current_reading;
             $bill->receipt_number=$request->receipt_number;
             $bill->bill_amount=$request->bill_amount;
-            $bill->status=$request->payment_status;
+            //$bill->status=$request->payment_status;
             
             $dataid=$bill->register->serviceProvider->id;
             $data=ServiceProvider::find($dataid);
@@ -102,14 +102,14 @@ class BillController extends Controller
             $bill->other_bill=$request->other_bill;
             $bill->receipt_number=$request->receipt_number;
             $bill->total_amount=$request->total_amount;
-            $bill->status=$request->payment_status;
+            //$bill->status=$request->payment_status;
             if ($request->transport_bill) {
                 $bill->transport_bill=$request->transport_bill;
             }
             
             $dataid=$bill->register->school->id;
             $data=School::find($dataid);
-            $data->payment_status=$request->payment_status;
+           // $data->payment_status=$request->payment_status;
             $data->save();
             $bill->save();
             }
@@ -224,24 +224,28 @@ class BillController extends Controller
         if($sid==3 || $sid==4 || $sid==5)
         {
             $data=ServiceProvider::find($id);
-            $billid=$data->register->serviceProviderBill->id;
-            $bill=ServiceProviderbill::find($billid);
-            $bill->last_reading=0;
-            $bill->current_reading=0;
-            $bill->receipt_number=0;
-            $bill->bill_amount=0;
-            $bill->save();
+            $bill=$data->register->serviceProviderBill;
+            $bill->delete(); 
+            // $billid=$data->register->serviceProviderBill->id;
+            // $bill=ServiceProviderbill::find($billid);
+            // $bill->last_reading=0;
+            // $bill->current_reading=0;
+            // $bill->receipt_number=0;
+            // $bill->bill_amount=0;
+            // $bill->save();
 
         }
         else{
             $data=School::find($id);
-            $billid=$data->register->schoolBill->id;
-            $bill=SchoolBill::find($billid);
-            $bill->school_bill=0;
-            $bill->other_bill=0;
-            $bill->receipt_number=0;
-            $bill->total_amount=0;
-            $bill->save();
+            $bill=$data->register->schoolBill;
+            $bill->delete(); 
+            // $billid=$data->register->schoolBill->id;
+            // $bill=SchoolBill::find($billid);
+            // $bill->school_bill=0;
+            // $bill->other_bill=0;
+            // $bill->receipt_number=0;
+            // $bill->total_amount=0;
+            // $bill->save();
         }
         
 

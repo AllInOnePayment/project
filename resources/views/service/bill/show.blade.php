@@ -36,37 +36,37 @@
             </div>
             <div class="col-6">
                 @if ($data->register)
-                @if ($data->register->schoolBill || $data->register->serviceProviderBill)
-                    
-                    @if(session()->get('service_id')>5)
-                    <p><label for="school_bill">school bill : {{$data->register->schoolBill->school_bill}}</label></p>
-                    <p><label for="transport_billt">transport bill : {{$data->register->schoolBill->transport_bill}}</label></p>
-                    <p><label for="other_bill">other bill : {{$data->register->schoolBill->other_bill}}</label></p>
-                    <p><label for="receipt_number">receipt number : {{$data->register->schoolBill->receipt_number}}</label></p>
-                    <p><label for="total_amount">total amount : {{$data->register->schoolBill->total_amount}}</label></p>
-                    <p><label for="payment_status">payment status :
-                        @if($data->Payment_status==1)
-                            Paid
+                    @if ($data->register->schoolBill || $data->register->serviceProviderBill)
+                        
+                        @if(session()->get('service_id')>5)
+                            <p><label for="school_bill">school bill : {{$data->register->schoolBill->school_bill}}</label></p>
+                            <p><label for="transport_billt">transport bill : {{$data->register->schoolBill->transport_bill}}</label></p>
+                            <p><label for="other_bill">other bill : {{$data->register->schoolBill->other_bill}}</label></p>
+                            <p><label for="receipt_number">receipt number : {{$data->register->schoolBill->receipt_number}}</label></p>
+                            <p><label for="total_amount">total amount : {{$data->register->schoolBill->total_amount}}</label></p>
+                            <p><label for="payment_status">payment status :
+                            @if($data->Payment_status==1)
+                                Paid
+                            @else
+                                Not paid
+                            @endif </label></p>
                         @else
-                            Not paid
-                        @endif </label></p>
+                            <p><label for="last_reading">last reading : {{$data->register->serviceProviderBill->last_reading}}</label></p>
+                            <p><label for="current_reading">current reading : {{$data->register->serviceProviderBill->current_reading}}</label></p>
+                            <p><label for="receipt_number">receipt number : {{$data->register->serviceProviderBill->receipt_number}}</label></p>
+                            <p><label for="bill_amount">bill amount : {{$data->register->serviceProviderBill->bill_amount}}</label></p>
+                            <p><label for="payment_status">payment status :
+                            @if($data->Payment_status==1)
+                                Paid
+                            @else
+                                Not paid
+                            @endif 
+                            </label></p>    
+                        @endif
                     @else
-                    <p><label for="last_reading">last reading : {{$data->register->serviceProviderBill->last_reading}}</label></p>
-                    <p><label for="current_reading">current reading : {{$data->register->serviceProviderBill->current_reading}}</label></p>
-                    <p><label for="receipt_number">receipt number : {{$data->register->serviceProviderBill->receipt_number}}</label></p>
-                    <p><label for="bill_amount">bill amount : {{$data->register->serviceProviderBill->bill_amount}}</label></p>
-                    <p><label for="payment_status">payment status :
-                        @if($data->Payment_status==1)
-                            Paid
-                        @else
-                            Not paid
-                        @endif 
-                    </label></p>    
+                        <p>there is no bill, to insert new bill</p>
+                        <a href="{{route('ServiceBill.create', 'id='.$data->id)}}" class="btn btn-primary">insert Bill</a>
                     @endif
-                @else
-                    <p>there is no bill, to insert new bill</p>
-                    <a href="{{route('ServiceBill.create', 'id='.$data->id)}}" class="btn btn-primary">insert Bill</a>
-                @endif
                 @else 
                     <p>Sorry, no one has been registered to pay for this user account,<br>
                     try to register to this service first.</p>

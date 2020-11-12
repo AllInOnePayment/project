@@ -4,7 +4,32 @@
 
 <div class="container">
     <div class="content-header">
-        
+            <h3 align="center">Import New Bills From Excel File</h3>
+            @if (count($errors))
+                <div class="alert alert-danger">Upload Validation Error<br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if ($message= Session::get('success'))
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <strong> {{ $message }}</strong>
+                </div>
+            @endif
+            <form action="{{ route('ImportBill')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <table class="table " >
+                    <tr>
+                        <td>Select File</td>
+                        <td><input type="file" name="bill"></td>
+                        <td><input type="submit" name="upload" value="upload"></td>
+                    </tr>
+                </table>
+            </form>
     </div> 
     <table class="table table-striped">
         <thead>

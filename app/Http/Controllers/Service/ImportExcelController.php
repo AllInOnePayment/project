@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Service;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Excel;
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Imports\serviceProvidersImport;
+use App\Imports\schoolsImport;
+use App\Imports\serviceProviderBillsImport;
+use App\Imports\schoolBillsImport;
 
 
 class ImportExcelController extends Controller
@@ -13,60 +18,33 @@ class ImportExcelController extends Controller
     //
     function import_user(Request $request){
         $this->validate($request, [
-            'select_user' => 'required|mimes:xls,xlsx'
+            'users' => 'required|mimes:xls,xlsx'
         ]);
-        $path=$request->file('select_user')->getRealPath();
-        $data=Excel::load($path)->get();
         $sid=session()->get('service_id');
-        if ($data->count() > 0) {
-            
-            if($sid==3 || $sid==4 || $sid==5) {
-                foreach ($data->toArray() as $key => $value) {
-                    foreach ($value as $row) {
-                        $insert_data[]= array(
-                                'user_number' => $row['user_number'], 
-                                'service_id' => $row['user_number'],
-                                'user_name' => $row['user_name'],
-                                'addres' => $row['addres'],
-                                'statue' => 0,
-                                'Payment_statues' => 0  
-                        );
-                    }
-                }
-            }else{
-                foreach ($data->toArray() as $key => $value) {
-                    foreach ($value as $row) {
-                        $transport=0;
-                        if ($row['transport']=='yes') {
-                            $transport=1;
-                        }else{
-                            $transport=0;
-                        }
-                        $insert_data[]= array(
-                                'user_number' => $row['user_number'], 
-                                'service_id' => $row['user_number'],
-                                'user_name' => $row['user_name'],
-                                'level' => $row['grade'],
-                                'department' => $row['department'],
-                                'class' => $row['class'],
-                                'transport' => $transport,
-                                'statue' => 0,
-                                'Payment_statues' => 0  
-                        );
-                    }
-                }
-            }
+        $user=$request->file('users')->store('import');
+        if($sid==3 || $sid==4 || $sid==5) {
+            (new ServiceProvidersImport)->import($user);
+        }else{
+            (new SchoolsImport)->import($user);  
         }
 
-        if (!empty($insert_data)) {
-            if ($sid==3 || $sid==4 || $sid==5) {
-                DB::table('service_providers')->insert($insert_data);
-            } else {
-                DB::table('schools')->insert($insert_data);
-            }
-            
-            
-        }
+       
+
      return back()->with('success','Excel data imported successfully.');   
+    }
+    function import_bill(Request $request){
+        $this->validate($request, [
+            'bill' => 'required|mimes:xls,xlsx'
+        ]);
+        $sid=session()->get('service_id');
+        $bill=$request->file('bill')->store('import');
+        if($sid==3 || $sid==4 || $sid==5) {
+            (new ServiceProviderBillsImport)->import($bill);
+        }else{
+            (new SchoolBillsImport)->import($bill);  
+        }
+
+
+        return back()->with('success','Excel data imported successfully.');  
     }
 }

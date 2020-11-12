@@ -53,7 +53,8 @@ Route::get('service/ServiceProfile/edit','Service\ServiceProfileController@edit'
 Route::post('service/ServiceProfile/picture','Service\ServiceProfileController@picture')->name('ServiceProfile.picture');
 Route::post('service/ServiceProfile/password','Service\ServiceProfileController@password')->name('ServiceProfile.password');
 Route::post('service/ServiceProfile/info','Service\ServiceProfileController@info')->name('ServiceProfile.info');
-Route::post('service/ImportExcel','service\ImportExcelController@import_user')->name('ImportUser');
+Route::post('service/ImportExcel/user','service\ImportExcelController@import_user')->name('ImportUser');
+Route::post('service/ImportExcel/bill','service\ImportExcelController@import_bill')->name('ImportBill');
 Route::post('service/Filter','service\FilterController@index')->name('Filter');
 
 Route::view('/manage_service_user', 'service/manageUser');
