@@ -10,9 +10,20 @@ use App\MobileBank;
 use App\Register;
 use App\History;
 use App\Transaction;
+use App\Migrations;
 
 class InformationController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     
     public function index()
     {
@@ -37,5 +48,26 @@ class InformationController extends Controller
     	return view('admin.information.systeminfo') 
     		->with('systemlist',$system)
     		->with($data);
+    }
+    public function index3()
+    { 
+        $tables = Migrations::count();
+        return view('admin.information.databaseinfo')
+                    ->with('tablecount',$tables);
+    }
+
+    public function index4()
+    { 
+        $transaction = Transaction::all();    
+        return view('admin.information.transactioninfo')
+                    ->with('transaction',$transaction);
+    }
+
+    public function show($id)
+    {
+        $detail = Transaction::find($id);
+        dd($detail);
+        return view('admin.information.transactiondetail')
+                    ->with('tradetail',$detail);
     }
 }

@@ -21,20 +21,35 @@
   <!-- /.content-header -->
 
     <!-- SEARCH FORM -->
-<div class="row">
-	<div class="col-sm-5">
-		<form class="form-inline ml-3">
-	      <div class="input-group input-group-sm">
-	        <input class="form-control form-control-navbar" type="search" placeholder="Search Here" aria-label="Search">
-	        <div class="input-group-append">
-	          <button class="btn btn-navbar" type="submit">
-	            <i class="fa fa-search"></i>
-	          </button>
-	        </div>
-	      </div>
-	    </form>
-	</div>
-</div> 
+	<form action="{{ route('FilterUser')}}" method="GET" class="d-inline-flex" >
+            @csrf
+		<div class="row">
+			<div class="col-sm-5">
+		   		<div class="form-control">
+		        <label>Type of user</label>
+		   			<select name="type" class="form-control">
+		   					<option class="form-control" value="1">Customer</option>
+		   					<option class="form-control" value="2">Admin</option>
+		   			</select>
+		   		</div>
+		   	</div>  
+		   	<div class="col-sm-5">
+		   		<div class="form-control">
+		        <label>Which Service</label>
+		   			<select name="service" class="form-control">
+		   				@foreach($services as $m)
+		   					<option class="form-control" value="{{ $m->id}}">{{$m->service_name}}</option>
+		   				@endforeach
+		   			</select>
+		   		</div>
+		   	</div>
+		   	<div class="col-sm-2">
+		   		<div class="display-center">
+		       		<button class="btn btn-primary" type="submit">Display</button>
+		   		</div>
+		   	</div>
+		</div> 
+   </form>
 <section class="content">
 	<div class="container-fluid"><hr>
     <a href="{{ route('admin.user.create')}}" class="btn btn-primary text-white">Add New User</a><hr>
@@ -47,18 +62,34 @@
 				<th>Phone</th>
 				<th>More</th>
 			</tr>
+		@if( $var==0)
 			@foreach( $listuser as $c)
 		<tr>
 			<th>{{ $c->id }}</th>
 			<th>{{ $c->name }}</th>
 			<th>{{ $c->email }}</th>
-			<th>{{ $c->service_id}}</th>
+			<th>{{ $c->service->service_name}}</th>
 			<th>{{ $c->phone }}</th>
 		<th><a class="btn btn-warning" href="{{ route('admin.user.edit',$c->id)}}">Edit</a>
       <a class="btn btn-info" href="{{ route('admin.user.show',$c->id)}}">Detail</a>
       </th>
 		</tr>
 			@endforeach
+		@endif
+		@if( $var==1)
+			@foreach( $listuser as $c)
+		<tr>
+			<th>{{ $c->id }}</th>
+			<th>{{ $c->user->name}}</th>
+			<th>{{ $c->user->email }}</th>
+			<th>{{ $c->service->service_name}}</th>
+			<th>{{ $c->user->phone }}</th>
+		<th><a class="btn btn-warning" href="{{ route('admin.user.edit',$c->id)}}">Edit</a>
+      <a class="btn btn-info" href="{{ route('admin.user.show',$c->id)}}">Detail</a>
+      </th>
+		</tr>
+			@endforeach
+		@endif
 		</table>
 		<div class="row"><div class="col-sm-4"></div>
 		    <div class="col-sm-4">

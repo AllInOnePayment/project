@@ -67,8 +67,12 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-       $serlist = Service::all()->where('id',$id); 
-       return view('admin.service.show')->with('servicelist',$serlist); 
+       $serlist = Service::all()->where('id',$id);
+       $registeredusers = Register::where('service_id',$id)
+                        ->paginate(5);
+       return view('admin.service.show')
+                    ->with('servicelist',$serlist)
+                    ->with('registeredusers',$registeredusers); 
     }
 
     /**

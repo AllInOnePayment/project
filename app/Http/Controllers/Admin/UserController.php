@@ -28,9 +28,34 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user['listuser'] = User::where('service_id',1)->paginate(5); 
-        return view('admin.user.listuser')->with($user);
+        $user['listuser'] = User::where('service_id',1)->paginate(5);
+        $services['services'] = Service::all(); 
+        return view('admin.user.listuser')->with($user)->with($services)->with('var',0);
     }
+
+
+    /*  A FUNCTION WHIC WILL BE RESPONSIBLE TO DISPLAY FILTERED USER LIST */
+
+    public function filter(Request $request)
+    {
+        $type = $request->type;
+        $service = $request->service;
+        $services['services'] = Service::all(); 
+        if ($type==1) {
+            $filter['listuser'] = Register::where('service_id',$service)->paginate(10);
+            return view('admin.user.listuser')->with($filter)->with($services)->with('var',1);
+        }
+        else
+        {
+            $filter['listuser'] = User::where('service_id',$service)->paginate(5);
+            return view('admin.user.listuser')->with($filter)->with($services)->with('var',0);
+        }
+
+    }
+
+
+
+
     /*public function index2()
     {
         return view('admin.user.update');
@@ -43,7 +68,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $serList = Service::orderBy('service_name')->get();
+        $serList = Service::where('service_name','AllinOneUser')->get();
         return view('admin.user.create')->with('servicelist',$serList);
     }
 
@@ -69,7 +94,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;        
-        $user->service_id = $request->serviceName;
+        $user->service_id = 1;
         $user->password = $request->pass;
         $user->save();
         return redirect()->route('admin.user.index');

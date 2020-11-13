@@ -40,9 +40,8 @@
             <div class="row">
            	<div class="col-sm-6">
            		<div class="form-control">
-                <label>Mobile Bank Name</label>
+                <label>Service Name</label>
            			<select name="service" class="form-control">
-                    <option class="form-control">{{$managers->service->service_name}}</option>
            				@foreach($service as $sl)
            					<option class="form-control" value="{{ $sl->id}}">{{$sl->service_name}}</option>
            				@endforeach

@@ -19,10 +19,9 @@
     <a href="{{ route('admin.service.create')}}" class="btn btn-primary text-white">Add Service</a><hr>
 	<div class="container">
 		<table class="table table-rounded table-striped">
-			<tr>
-				<th>ID</th>
-				<th>Name</th>
+			<tr> 
 				<th>Service ID</th>
+				<th>Name</th>
 				<th>Http</th>
 				<th>Bank Account</th>
 				<th>Mobile Banking</th>
@@ -30,12 +29,11 @@
 			</tr>
 			@foreach( $servicelist as $n)
 			<tr>
-				<th>{{ $n->id }}</th>
+				<th>{{ $n->id }}</th> 
 				<th>{{ $n->service_name }}</th>
-				<th>{{ $n->service_id }}</th>
 				<th>{{ $n->http }}</th>
 				<th>{{ $n->bank_account }}</th>
-				<th>{{ $n->mobile_bank_id }}</th> 
+				<th>{{ $n->mobilebank->bank_name }}</th> 
 				<th><a class="btn btn-warning" href="{{ route('admin.service.edit',$n->id)}}">Edit</a>
         <a class="btn btn-info" href="{{ route('admin.service.show',$n->id)}}">Detail</a>
         </th>

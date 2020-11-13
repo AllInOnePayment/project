@@ -1,21 +1,28 @@
 @extends('layouts.admin')
 
 @section('content')
+ 
 
-<section class="container-fluid">
-<h3 class="mt-4 mb-4 text text-primary">Detailed User Information </h3><hr>
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form> 
-    <hr>
+<div class="container">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-primary"><b>Detailed</b> User Information</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{ route('adminhome')}}">Home</a></li>
+            <li class="breadcrumb-item active"><b>User | detail</b></li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+<hr>
+<section class="container">
 	<div class="row">
 	  <!-- /.col -->
 	  <div class="col-md-6">
@@ -65,8 +72,7 @@
 	    <!-- Widget: user widget style 2 -->
 	    <div class="card card-widget widget-user-2">
 	      <!-- Add the bg color to the header using any of the bg-* classes -->
-	      <div class="widget-user-header bg-primary">
-	        
+	      <div class="widget-user-header bg-secondary">  	
 	        <h5 class="widget-user-desc text-white"><b>Registered In</b></h5>
 	      </div>
 	      <div class="card-footer p-0">
@@ -100,7 +106,7 @@
 	    <!-- Widget: user widget style 2 -->
 	    <div class="card card-widget widget-user-2">
 	      <!-- Add the bg color to the header using any of the bg-* classes -->
-	      <div class="widget-user-header bg-primary">
+	      <div class="widget-user-header bg-secondary">
 	        
 	        <h5 class="widget-user-desc text-white"><b>Payment</b></h5>
 	      </div>
@@ -124,17 +130,17 @@
 	    <!-- Widget: user widget style 2 -->
 	    <div class="card card-widget widget-user-2">
 	      <!-- Add the bg color to the header using any of the bg-* classes -->
-	      <div class="widget-user-header bg-primary">
+	      <div class="widget-user-header bg-secondary">
 	        
 	        <h5 class="widget-user-desc text-white"><b>Transaction</b></h5>
 	      </div>
 	      <div class="card-footer p-0">
 	        <ul class="nav flex-column">
-	    @if(count($user->transaction)>0 && $user->transaction)<5)
+	    @if(count($user->transaction)>0 && count($user->transaction)<5)
 	        @foreach($user->transaction as $t)      	
 	          <li class="nav-item">
 	            <a href="#" class="nav-link">
-	              {{$t->mobileBank->bank_name}} <span class="float-right badge bg-primary">{{$t->amount}}</span>
+	              {{$t->mobileBank->bank_name}} <span class="float-right badge bg-primary">Amount : {{$t->amount}}</span>
 	            </a>
 	          </li>
 	        @endforeach

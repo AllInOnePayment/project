@@ -1,29 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-use App\User;
-use App\Register;
-use App\History;
-use App\Service; 
-
-class AdminController extends Controller
+class SystemInfoController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    
     /**
      * Display a listing of the resource.
      *
@@ -31,15 +13,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        // creating an array
-            $data = array(
-                'uc' => User::count(),
-                'rc' => Register::count(),
-                'hc' => History::count(),
-                'sc' => Service::count()
-            );
-            $arr  = Auth::user();
-            return view('admin.home.index')->with('userinfo',$arr)->with($data);
+        return view('admin.information.databaseinfo');
     }
 
     /**

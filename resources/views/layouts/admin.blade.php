@@ -318,25 +318,14 @@
                   <p>Systems Capacity</p>
                 </a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-table"></i>
-              <p>
-                System info
-                <i class="fa fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
+                <a href="{{route('databaseinfo')}}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Database access</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
+                <a href="{{ route('transactioninfo')}}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Transaction history</p>
                 </a>
@@ -355,11 +344,10 @@
           </li>
           <li class="nav-header">All In | ONE</li>
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
+            <a href="{{ route('calander')}}" class="nav-link">
               <i class="nav-icon fa fa-calendar"></i>
               <p>
-                Calendar
-                <span class="badge badge-info right">2</span>
+                Calendar 
               </p>
             </a>
           </li>

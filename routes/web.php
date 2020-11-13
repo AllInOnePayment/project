@@ -35,20 +35,36 @@ Route::view('/notification', 'users.notification');
 Route::view('/profile', 'users.profile');
 Route::view('/register_service', 'users.registerService');
 
+
+
+
 // route for admin
-Route::view('/admin', 'admin\manageUser')->name('adminhome');
-Route::resource('/admin/user', 'Admin\UserController',
+Route::prefix('admin')->group( function()
+ {
+ 	Route::resource('user', 'Admin\UserController',
 				['as'=>'admin']);
-Route::resource('/admin/manager', 'Admin\AddmanagerController',
+
+    Route::resource('service', 'Admin\ServiceController',
 				['as'=>'admin']);
-Route::get('/admin/information','Admin\InformationController@index')
+    Route::resource('manager', 'Admin\AddmanagerController',
+				['as'=>'admin']);
+    Route::resource('bank', 'Admin\BankController',
+				['as'=>'admin']);
+    Route::view('calander','admin\user\todolist')->name('calander');
+    Route::get('information','Admin\InformationController@index')
 				->name('information');
-Route::get('/admin/systeminfo','Admin\InformationController@index2')
+    Route::get('information/system',
+	'Admin\InformationController@index2')
 				->name('systeminfo');
-Route::resource('/admin/bank', 'Admin\BankController',
-				['as'=>'admin']);
-Route::resource('/admin/service', 'Admin\ServiceController',
-				['as'=>'admin']);
+    Route::get('information/database',
+	'Admin\InformationController@index3')
+				->name('databaseinfo');
+    Route::get('information/transaction',
+	'Admin\InformationController@index4')
+				->name('transactioninfo'); 
+    Route::view('/', 'admin\manageUser')->name('adminhome');
+    Route::get('listuser','Admin\UserController@filter')->name('FilterUser');
+ }); 
 Route::view('/manage_service', 'admin/manageService');
 Route::view('/admin/update','admin/user/update');
 Route::view('/add_admin', 'admin/addAdmin');
