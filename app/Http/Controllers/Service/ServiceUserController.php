@@ -34,6 +34,7 @@ class ServiceUserController extends Controller
               $data=ServiceProvider::all()->where('service_id',$sid)->where('status',1);
         }
         else{
+
             $data=School::all()->where('service_id',$sid)->where('status',1);
             }
         return view('service.user.index',['data'=>$data,'index'=>$index,'filter'=>$filter]);
@@ -129,7 +130,10 @@ class ServiceUserController extends Controller
         
         return view('service.user.edit',['data'=>$data]);
     }
-
+    public function adduser($id)
+    {
+        
+    }
     /**
      * Update the specified resource in storage.
      *

@@ -42,9 +42,16 @@
                 </label></p>
             </div>
             <div class="col-6">
-                <iframe src="" frameborder="0" name="edit">
-                    
-                </iframe>
+                @if($data->status==1)
+                <p><label for="User_number">User Name : {{$data->register->user->name}}</label></p>
+                <p><label for="User_name">Phone Number : {{$data->register->user->phone}}</label></p>
+                <p><label for="User_name">Email : {{$data->register->user->email}}</label></p>
+                @else
+                
+                <a href="{{route('UserRegister.index',$data->id)}}" class="btn btn-primary">Add New User</a>
+               {{--<a href="{{route('Tests.index',$data->id)}}" class="btn btn-primary">Select User</a>--}} 
+                @endif
+                
             </div>
             
             <a href="{{route('ServiceUser.edit',$data->id)}}" class="btn btn-primary">Edit User Info</a>
