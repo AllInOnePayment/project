@@ -256,7 +256,7 @@
             @if($segment=='bank')
              active
              @endif">
-              <i class="nav-icon fa fa-tree"></i>
+              <i class="nav-icon fa fa-tasks"></i>
               <p>
                 Manage Systems
                 <i class="fa fa-angle-left right"></i>
@@ -335,8 +335,8 @@
           </li>
           
           <li class="nav-item">
-            <a href="{{ route('sendmail')}}" class="nav-link">
-              <i class="nav-icon fa fa-th"></i>
+            <a href="{{ route('sendmail')}}" class="{{ (request()->is('admin/email*')) ? 'active' : '' }} nav-link">
+              <i class="nav-icon fa fa-envelope-square"></i>
               <p>
                 Send Email
                 <span class="right badge badge-danger">email</span>

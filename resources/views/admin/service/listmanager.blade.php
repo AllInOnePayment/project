@@ -46,7 +46,7 @@
       </tr>
         @endforeach
     </table>
-    <div class="row"><div class="col-sm-4"></div>
+      <div class="row"><div class="col-sm-4"></div>
         <div class="col-sm-4">
           {{ $managers->render() }}
         </div><div class="col-sm-4"></div>

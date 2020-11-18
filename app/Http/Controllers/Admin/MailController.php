@@ -27,12 +27,12 @@ class MailController extends Controller
     public function send(Request $request, $id)
     {
     	$managersend = User::find($id);
-    	$detials = [
-    		'title' => $request->subject,
+    	$detials = [ 
     		'body'  => $request->message
     	];
-    	Mail::to($managersend->email)->send(new SendInfoMail($detials));
 
+    	Mail::to($managersend->email)->send(new SendInfoMail($detials));
+        
     	return redirect()->route('sendmail');
     }
 
