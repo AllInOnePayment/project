@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\ServiceProvider;
 use App\School;
+use App\SchoolInfo;
 use App\SchoolBill;
 use App\ServiceProviderBill;
 class ServiceUserController extends Controller
@@ -27,17 +28,20 @@ class ServiceUserController extends Controller
      */
     public function index()
     {    $sid=session()->get('service_id');
+        $gid=session()->get('group');
         $index=0;
         $filter="";
-        if($sid==3 || $sid==4 || $sid==5)
+        if($gid==3)
         {
               $data=ServiceProvider::all()->where('service_id',$sid)->where('status',1);
         }
         else{
 
             $data=School::all()->where('service_id',$sid)->where('status',1);
+            $datagrade=SchoolInfo::all()->where('service_id',$sid)->first();
             }
-        return view('service.user.index',['data'=>$data,'index'=>$index,'filter'=>$filter]);
+
+        return view('service.user.index',['data'=>$data,'index'=>$index,'filter'=>$filter,'datagrade'=>$datagrade]);
     }
 
     /**
@@ -46,8 +50,9 @@ class ServiceUserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('service.user.create');
+    {   $sid=session()->get('service_id');
+        $data=SchoolInfo::all()->where('service_id',$sid)->first();
+        return view('service.user.create',['data'=>$data]);
     }
 
     /**
@@ -59,8 +64,11 @@ class ServiceUserController extends Controller
     public function store(Request $request)
     {
         //
+
+        $gid=session()->get('group');
+        
         $sid=session()->get('service_id');
-        if($sid==3 || $sid==4 || $sid==5)
+        if($gid==3)
         {
             $user=new ServiceProvider;
             $user->user_number=$request->user_number;
@@ -78,7 +86,8 @@ class ServiceUserController extends Controller
             $user->service_id=$sid;
             $user->user_name=$request->user_name;
             $user->level=$request->level;
-            $user->department=$request->department;
+
+            $user->address=$request->address;
             $user->class=$request->class;
             $user->transport=$request->transport;
             $user->status=0;
@@ -96,9 +105,10 @@ class ServiceUserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+        $gid=session()->get('group');
         $sid=session()->get('service_id');
-        if($sid==3 || $sid==4 || $sid==5)
+        if($gid==3)
         {
               $data=ServiceProvider::find($id);
         }
@@ -117,18 +127,19 @@ class ServiceUserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    { 
+        $gid=session()->get('group');
         $sid=session()->get('service_id');
-        if($sid==3 || $sid==4 || $sid==5)
+        if($gid==3)
         {
               $data=ServiceProvider::find($id);
         }
         else{
              $data=School::find($id);
-            
+             $datagrade=SchoolInfo::all()->where('service_id',$sid)->first();
             }
         
-        return view('service.user.edit',['data'=>$data]);
+        return view('service.user.edit',['data'=>$data,'datagrade'=>$datagrade]);
     }
     public function adduser($id)
     {
@@ -142,9 +153,10 @@ class ServiceUserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $gid=session()->get('group');
         $sid=session()->get('service_id');
-        if($sid==3 || $sid==4 || $sid==5)
+        if($gid==3)
         {
             $request->validate([
                 'user_number'=>"required",
@@ -159,11 +171,6 @@ class ServiceUserController extends Controller
             //$data->status=$request->status;
             $data->payment_status=$request->payment_status;
              
-            $billid=$data->register->serviceProviderBill->id;
-            $bill=ServiceProviderbill::find($billid);
-            $bill->status=$request->payment_status;
-            
-            $bill->save();
             $data->save();
         }
         else{
@@ -172,18 +179,10 @@ class ServiceUserController extends Controller
             $data->service_id=$data->service_id;
             $data->user_name=$request->user_name;
             $data->level=$request->level;
-            $data->department=$request->department;
+            $data->address=$request->address;
             $data->class=$request->class;
             //$data->status=$request->status;
             $data->payment_status=$request->payment_status;
-            
-            if ($data->register->schoolBill->id) {
-                $billid=$data->register->schoolBill->id;
-                $bill=SchoolBill::find($billid);
-                $bill->status=$request->payment_status;
-                
-                $bill->save();
-            }
            
             $data->save();
             }
@@ -213,8 +212,9 @@ class ServiceUserController extends Controller
         }
     */
         //deleting user data from the services
+        $gid=session()->get('group');
         $sid=session()->get('service_id');
-        if($sid==3 || $sid==4 || $sid==5)
+        if($gid==3)
         {
             $user=ServiceProvider::find($id); 
             $user->delete();  

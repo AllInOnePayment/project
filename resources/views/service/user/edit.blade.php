@@ -10,6 +10,7 @@
         <form action="{{route('ServiceUser.update',$data->id)}}" method="POST">
             @csrf 
             {{ method_field('PUT') }} 
+            
             <div class="form-group">
                 <label for="user_number">user number:</label>
                 <input type="text" name="user_number" value=" {{$data->user_number}}" required>
@@ -25,40 +26,37 @@
                 @enderror
             </div>
             
-            @if(session()->get('service_id')>5)
+            @if(session()->get('group')==4)
             <div class="form-group">
                 <label for="level">grade : </label>
-                <input type="number" min=-2 max=12 name="level" class="col-sm-3" value="{{$data->level}}" required>
+                <select name="level" class="col-sm-2">
+                       @for( $i=-2; $i<=$datagrade->grade_max; $i++)
+                         
+                         <option value="{{$i}}" @if($data->level==$i)
+                        selected
+                        @endif >{{$i}}</option>
+                        
+                         @endfor
+                    </select>
+                
             </div>
             <div class="form-group">
-                <label for="department">department : </label>
-                <select name="department" class="col-sm-3">
-                    <option value="natural"  @if($data->department=="natural")
-                        selected
-                        @endif>natural</option>
-                    <option value="social"  @if($data->department=="social")
-                        selected
-                        @endif>social</option>
-                </select>
+                <label for="address">Address : </label>
+                <input type="text" name="address" value=" {{$data->address}}" required>
             </div>
             <div class="form-group">
                 <label for="class">class : </label>
                 <select name="class" class="col-sm-3">
-                    <option value="A" @if($data->class=="A")
+                {{$j='A'}}
+                       @for( $i=1; $i<=$datagrade->class_max; $i++)
+                         
+                       <option value="{{$j}}" @if($data->class==$j)
                         selected
-                        @endif>A</option>
-                    <option value="B" @if($data->class=="B")
-                        selected
-                        @endif>B</option>
-                    <option value="C" >C @if($data->class=="C")
-                        selected
-                        @endif</option>
-                    <option value="D" >D @if($data->class=="D")
-                        selected
-                        @endif</option>
-                    <option value="E" >E @if($data->class=="E")
-                        selected
-                        @endif</option>
+                        @endif>{{$j++}}</option>
+                         
+                         @endfor
+                   
+                    
                 </select>
             </div>
             
@@ -84,7 +82,7 @@
             
             @endif
             <div class="form-group">
-                <label for="payment_status">patyment status : </label>
+                <label for="payment_status">payment status : </label>
                 <select name="payment_status" class="col-sm-3">
                     <option value=0 @if($data->Payment_status==0)
                         selected

@@ -13,8 +13,9 @@ use App\Service;
 class TestsController extends Controller
 {
     public function index($id){
+        $gid=session()->get('group');
         $sid=session()->get('service_id');
-        if($sid==3 || $sid==4 || $sid==5)
+        if($gid==3 )
         {
               $data=ServiceProvider::find($id);
         }

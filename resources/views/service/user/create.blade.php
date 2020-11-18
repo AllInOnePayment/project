@@ -47,27 +47,35 @@
                     <input type="text" name="user_name" class="col-sm-5" value="" required>
                 </div><br>
                 
-                @if(session()->get('service_id')>5)
+                @if(session()->get('group')==4)
                 <div class="form-group">
                     <label for="level" class="col-sm-3">grade : </label>
-                    <input type="number" min=-2 max=12 name="level" class="col-sm-2 " value="" required>
-                </div><br>
-                <div class="form-group">
-                    <label for="department" class="col-sm-3">department : </label>
-                    <select name="department" class="col-sm-2">
-                        <option value="natural" >natural</option>
-                        <option value="social" >social</option>
+                    <select name="level" class="col-sm-2">
+                       @for( $i=-2; $i<=$data->grade_max; $i++)
+                         
+                         <option value="{{$i}}" >{{$i}}</option>
+                        
+                         @endfor
                     </select>
+                    
                 </div><br>
                 <div class="form-group">
+                    <label for="address" class="col-sm-3">User Address :</label>
+                    <input type="text" name="address" class="col-sm-5" value="" required>
+                </div><br>
+                <div class="form-group">
+                   
                     <label for="class" class="col-sm-3">class : </label>
                     <select name="class" class="col-sm-2">
-                        <option value="A" >A</option>
-                        <option value="B" >B</option>
-                        <option value="C" >C</option>
-                        <option value="D" >D</option>
-                        <option value="E" >E</option>
+                             {{$j='A'}}
+                       @for( $i=1; $i<=$data->class_max; $i++)
+                         
+                         <option value="{{$j}}" >{{$j++}}</option>
+                         
+                         @endfor
                     </select>
+                    
+                    
                 </div><br>
                 <div class="form-group">
                     <label for="transport" class="col-sm-3">transport : </label>

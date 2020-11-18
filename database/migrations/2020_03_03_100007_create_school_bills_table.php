@@ -21,7 +21,6 @@ class CreateSchoolBillsTable extends Migration
             $table->integer('other_bill')->nullable();
             $table->string('receipt_number');
             $table->integer('total_amount');
-            $table->integer('status');
             $table->timestamps();
 
             $table->foreign('register_id')->references('id')->

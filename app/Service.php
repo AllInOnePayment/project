@@ -27,4 +27,7 @@ class Service extends Model
     public function register(){
         return $this->hasMany('App\Register');
     }
+    public function schoolinfo(){
+        return $this->hasOne('App\SchoolInfo');
+    }
 }

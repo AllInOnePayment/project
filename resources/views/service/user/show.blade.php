@@ -14,7 +14,7 @@
                 <p><label for="User_name">User name : {{$data->user_name}}</label></p>
                 @if(session()->get('service_id')>5)
                     <p><label for="Grade">Grade : {{$data->level}}</label></p>
-                    <p><label for="Department">Department : {{$data->department}}</label></p>
+                    <p><label for="address">Address : {{$data->address}}</label></p>
                     <p><label for="Class">Class : {{$data->class}}</label></p>
                     <p><label for="Transport_status">Transport status :
                         @if($data->transport==1)
@@ -48,7 +48,7 @@
                 <p><label for="User_name">Email : {{$data->register->user->email}}</label></p>
                 @else
                 
-                <a href="{{route('UserRegister.index',$data->id)}}" class="btn btn-primary">Add New User</a>
+                <a href="{{route('UserRegister.index',$data->id)}}" class="btn btn-primary">Add Payer</a>
                {{--<a href="{{route('Tests.index',$data->id)}}" class="btn btn-primary">Select User</a>--}} 
                 @endif
                 

@@ -124,8 +124,9 @@ class BillController extends Controller
      */
     public function show($id)
     {
+        $gid=session()->get('group');
         $sid=session()->get('service_id');
-        if($sid==3 || $sid==4 || $sid==5)
+        if($gid==3)
         {
               $data=ServiceProvider::find($id);
         }
@@ -145,15 +146,15 @@ class BillController extends Controller
      */
     public function edit($id)
     {
+        $gid=session()->get('group');
         $sid=session()->get('service_id');
-        if($sid==3 || $sid==4 || $sid==5)
+        if($gid==3)
         {
               $data=ServiceProvider::find($id);
-              
         }
         else{
              $data=School::find($id);
-             
+           
             }
         
         return view('service.bill.edit',['data'=>$data]);
@@ -168,8 +169,9 @@ class BillController extends Controller
      */
     public function update(Request $request, $id)
     {   
+        $gid=session()->get('group');
         $sid=session()->get('service_id');
-        if($sid==3 || $sid==4 || $sid==5)
+        if($gid==3)
         {
             $bill=ServiceProviderbill::find($id);
             $bill->last_reading=$request->last_reading;
@@ -219,9 +221,9 @@ class BillController extends Controller
     public function destroy($id)
     {
         //
-        
+        $gid=session()->get('group');
         $sid=session()->get('service_id');
-        if($sid==3 || $sid==4 || $sid==5)
+        if($gid==3)
         {
             $data=ServiceProvider::find($id);
             $bill=$data->register->serviceProviderBill;

@@ -42,9 +42,11 @@ class HomeController extends Controller
             { 
                 session()->put('service_name',$a->service_name); 
                 session()->put('service_id',$a->id); 
+                session()->put('group',$a->group);
+                
             }
         
-            
+           
             return redirect('ServiceUser');
         }
 

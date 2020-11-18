@@ -12,7 +12,7 @@
                 <p><label for="User number">User number : {{$data->user_number}}</label></p>
                 <p><label for="User name">User name : {{$data->user_name}}</label></p>
                 <?php
-                if(session()->get('service_id')>5)
+                if(session()->get('group')==4)
                 {$id=$data->register->schoolBill->id;}
                 else
                 {$id=$data->register->serviceProviderBill->id;}
@@ -20,7 +20,7 @@
                 <form action="{{route('ServiceBill.update',$id)}}" method="POST">
                     @csrf 
                     {{ method_field('PUT') }} 
-                    @if(session()->get('service_id')>5)
+                    @if(session()->get('group')==4)
                     <div class="form-group">
                         <label for="school_bill">school bill :</label>
                         <input type="text" name="school_bill" value=" {{$data->register->schoolBill->school_bill}}">

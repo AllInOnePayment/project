@@ -37,7 +37,7 @@
                 <th>Number</th>
                 <th>User number</th>
                 <th>User name</th>
-                @if(session()->get('service_id')>5)
+                @if(session()->get('group')==4)
                     <th>Grade</th>
                     <th>Department</th>
                     <th>Class</th>
@@ -55,7 +55,7 @@
                     <td>{{++$index}}</td>
                     <td>{{$item->user_number}}</td>
                     <td>{{$item->user_name}}</td>
-                    @if(session()->get('service_id')>5)
+                    @if(session()->get('group')==4)
                         <td>{{$item->level}}</td>
                         <td>{{$item->department}}</td>
                         <td>{{$item->class}}</td>

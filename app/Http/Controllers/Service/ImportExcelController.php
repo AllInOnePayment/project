@@ -21,8 +21,9 @@ class ImportExcelController extends Controller
             'users' => 'required|mimes:xls,xlsx'
         ]);
         $sid=session()->get('service_id');
+        $gid=session()->get('group');
         $user=$request->file('users')->store('import');
-        if($sid==3 || $sid==4 || $sid==5) {
+        if($gid==3) {
             (new ServiceProvidersImport)->import($user);
         }else{
             (new SchoolsImport)->import($user);  
@@ -36,9 +37,10 @@ class ImportExcelController extends Controller
         $this->validate($request, [
             'bill' => 'required|mimes:xls,xlsx'
         ]);
+        $gid=session()->get('group');
         $sid=session()->get('service_id');
         $bill=$request->file('bill')->store('import');
-        if($sid==3 || $sid==4 || $sid==5) {
+        if($gid==3) {
             (new ServiceProviderBillsImport)->import($bill);
         }else{
             (new SchoolBillsImport)->import($bill);  

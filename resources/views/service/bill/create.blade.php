@@ -20,7 +20,7 @@
                         </select> 
                     </div>
                     
-                    @if(session()->get('service_id')>5)
+                    @if(session()->get('group')==4)
                     <div class="form-group">
                         <label for="school_bill">school bill :</label>
                         <input type="text" name="school_bill" value="" required>

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\ServiceProvider;
 use App\School;
+use App\SchoolInfo;
+
 
 class FilterController extends Controller
 {
@@ -14,8 +16,8 @@ class FilterController extends Controller
         $sid=session()->get('service_id');
         $index=0;
         
-        
-        if($sid==3 || $sid==4 || $sid==5)
+        $gid=session()->get('group');
+        if($gid==3)
         {
             $filter = array('status' =>$request->status ,
                         'payment'=>$request->payment);
@@ -32,12 +34,11 @@ class FilterController extends Controller
             }
             
         }
-        else{
+        else{   $datagrade=SchoolInfo::all()->where('service_id',$sid)->first();
             $filter = array('status' =>$request->status ,
                         'payment'=>$request->payment,
                         'transport'=>$request->transport,
                         'grade'=>$request->grade,
-                        'department'=>$request->department,
                         'class'=>$request->class);
             
             if($request->status=="all"){
@@ -55,24 +56,19 @@ class FilterController extends Controller
             }else{
                 $grade=' and level='.$request->grade;
             }
-            if($request->department=="all"){
-                $department='';
-            }else{
-                $department=' and department='.$request->department;
-            }
             if($request->class=="all"){
                 $class='';
             }else{
                 $class=' and class='.$request->class;
             }
-            $sql='select * from schools where service_id = '. 6 .''.$status.''.$payment.''.$grade.''.$department.''.$class;
+            $sql='select * from schools where service_id = '. 6 .''.$status.''.$payment.''.$grade.''.$class;
             
             $data = DB::select($sql);
             
                         
     
             }
-        return view('service.user.index',['data'=>$data,'index'=>$index,'filter'=>$filter]);
+        return view('service.user.index',['data'=>$data,'index'=>$index,'filter'=>$filter,'datagrade'=>$datagrade]);
     }
 
     function filterAll(){

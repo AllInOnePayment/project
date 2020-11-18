@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 class UserRegisterController extends Controller
 {
     public function index($id){
-       
+        $gid=session()->get('group');
       $sid=session()->get('service_id');
-        if($sid==3 || $sid==4 || $sid==5)
+        if($gid==3)
         {
               $data=ServiceProvider::find($id);
         }
@@ -42,8 +42,8 @@ class UserRegisterController extends Controller
         $newdataa=new Register();
         $sid=session()->get('service_id');
         $user=User::all()->where('email',$data['email'])->first();
-        
-        if($sid==3 || $sid==4 || $sid==5)
+        $gid=session()->get('group');
+        if($gid==3)
         {
               $dataa=ServiceProvider::find($id);
               $newdataa->service_provider_id= $dataa->id;
@@ -66,16 +66,5 @@ class UserRegisterController extends Controller
         
              return redirect()->route('ServiceUser.show',$id);
     }
-    public function edit($id){
-        $sid=session()->get('service_id');
-        if($sid==3 || $sid==4 || $sid==5)
-        {
-              $dataa=ServiceProvider::find($id);
-        }
-        else{
-            $dataa=School::find($id);
-        }
-        return view('service.user.select',['data'=>$data]);
-
-    }
+    
 }
