@@ -11,6 +11,7 @@ use App\Register;
 use App\History;
 use App\Transaction;
 use App\Migrations;
+use App\Charts\UserChart;
 
 class InformationController extends Controller
 {
@@ -58,9 +59,25 @@ class InformationController extends Controller
 
     public function index4()
     { 
-        $transaction = Transaction::all();    
+ 
+        $mb = MobileBank::all(); 
+        foreach ($mb as $row) 
+            {
+                $var = $row->id;
+                $count = Transaction::where('mobile_bank_id',$var)->count();
+                $dataName[$var]=$row->bank_name;
+                $dataCount[$var]=$count;
+            } 
+
+        $TraChart = new UserChart;
+        $TraChart->labels(array_values($dataName));
+        $TraChart->dataset('Dataset','bar', array_values($dataCount))
+                ->backgroundColor('seagreen');
+
+        $transaction = Transaction::paginate(6);    
         return view('admin.information.transactioninfo')
-                    ->with('transaction',$transaction);
+                    ->with('transaction',$transaction)
+                    ->with('TraChart',$TraChart);
     }
 
     public function show($id)

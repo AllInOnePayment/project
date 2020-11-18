@@ -60,7 +60,7 @@
            	<div class="col-sm-5"></div>
            	<div class="col-sm-2">
            		<div class="form-control">
-           			<button type="submit" value="save" class="btn btn-primary btn-block btn-flat">Register</button>
+           			<button type="submit" value="save" class="btn btn-primary btn-block btn-flat">Update</button>
            		</div>
            	</div>
            	<div class="col-sm-5"></div>

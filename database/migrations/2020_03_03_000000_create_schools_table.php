@@ -19,7 +19,7 @@ class CreateSchoolsTable extends Migration
             $table->bigInteger('service_id')->unsigned();
             $table->string('user_name');
             $table->integer('level');
-            $table->string('department');
+            $table->string('address');
             $table->string('class');
             $table->integer('status');
             $table->integer('payment_status');

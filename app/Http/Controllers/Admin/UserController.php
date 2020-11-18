@@ -10,6 +10,8 @@ use App\Register;
 use App\Service;
 use App\history;
 use App\MobileBank;
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
     /**
@@ -80,22 +82,32 @@ class UserController extends Controller
      */
     public function store(Request $request, User $user)
     {
-        if ($request->photo->getClientOriginalName()) {
+        if ($request->hasFile('userphoto')) {
+            // Get filename with the extendsion
+            $filenameWithExt = $request->file('userphoto')->getClientOriginalName();
 
-            $ext = $request->photo->getClientOriginalExtension();
-            $file = date('YmdHis').rand(1,9999).'.'.$ext;
-            $request->photo->storeAs('public/avator',$file);
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+            //get Just Extenstion
+            $extension = $request->file('userphoto')->getClientOriginalExtension();
+
+            // Filename to store
+            $filenameToStore = $filename.'_'.time().'.'.$extension;
+
+            // Upload to database
+            $path = $request->file('userphoto')->storeAs('public/avator', $filenameToStore);
         }
         else
         {
-            $file='';
+            $filenameToStore='noImage.jpg';
         }
-        $user->image = $file;
+        $user->image = $filenameToStore;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;        
-        $user->service_id = 1;
-        $user->password = $request->pass;
+        $user->service_id = 1; 
+        $user->password = Hash::make($request->pass);
         $user->save();
         return redirect()->route('admin.user.index');
     }

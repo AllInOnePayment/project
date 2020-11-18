@@ -22,9 +22,8 @@
 
 <div class="row">
 	<div class="col-sm-1"></div>
-	<div class="col-sm-10">
-		<h3 class="text text-primary">All In | ONE</h3><hr>
-		<form method="post" action="{{ route('admin.service.store')}}">
+	<div class="col-sm-10"> 
+		<form method="post" action="{{ route('admin.service.store')}}" enctype="multipart/form-data">
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
            <div class="row"> 
            	<div class="col-sm-6">
@@ -57,18 +56,46 @@
                 <input type="text" name="http" class="form-control">
               </div>
             </div>
-           	</div><hr>
-           	<div class="row">
+           	</div><hr> 
+           <div class="row"> 
+            <div class="col-sm-6">
+              <div class="form-control">
+                <label>Payment Start</label>
+                <input type="number" name="paymentstart" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-control">
+                <label>Payment End</label>
+                <input type="number" name="paymentend" class="form-control">
+              </div>
+            </div>
            </div><hr>
            <div class="row">
-           	<div class="col-sm-5"></div>
-           	<div class="col-sm-2">
-           		<div class="form-control">
-           			<button type="submit" value="save" class="btn btn-primary btn-block btn-flat">Register</button>
-           		</div>
-           	</div>
-           	<div class="col-sm-5"></div>
-           </div>	 
+            <div class="col-sm-6">
+              <div class="form-control">
+                <label>Group</label>
+                <select name="group" class="form-control"> 
+                    <option class="form-control" value="3">Service Provider</option> 
+                    <option class="form-control" value="4">School</option> 
+                </select>
+              </div>
+            </div>
+           	<div class="col-sm-5">
+                <div class="form-group has-feedback display-flex">
+                <input type="file" name="servicephoto">
+                <label>Profile Photo</label>
+              </div>
+            </div> 
+           </div>
+           <div class="row">
+             <div class="col-sm-3"></div>	
+            <div class="col-sm-2">
+              <div class="form-control">
+                <button type="submit" value="save" class="btn btn-primary btn-block btn-flat">Register</button>
+              </div>
+            </div><div class="col-sm-4"></div>
+           </div>
         </form>  
 	</div>
 	<div class="col-sm-1"></div>

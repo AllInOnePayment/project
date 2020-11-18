@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/datepicker/datepicker3.css') }}">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker-bs3.css') }}">
+  <
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
@@ -334,11 +335,11 @@
           </li>
           
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="{{ route('sendmail')}}" class="nav-link">
               <i class="nav-icon fa fa-th"></i>
               <p>
-                All In One
-                <span class="right badge badge-danger">New</span>
+                Send Email
+                <span class="right badge badge-danger">email</span>
               </p>
             </a>
           </li>
@@ -493,6 +494,7 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }} "></script>
 <!-- Morris.js charts -->

@@ -43,14 +43,16 @@ Route::prefix('admin')->group( function()
  {
  	Route::resource('user', 'Admin\UserController',
 				['as'=>'admin']);
-
+    Route::get('index','Admin\AdminController@index')
+                ->name('adminhome');
     Route::resource('service', 'Admin\ServiceController',
 				['as'=>'admin']);
     Route::resource('manager', 'Admin\AddmanagerController',
 				['as'=>'admin']);
     Route::resource('bank', 'Admin\BankController',
 				['as'=>'admin']);
-    Route::view('calander','admin\user\todolist')->name('calander');
+    Route::view('calander','admin\user\todolist')
+                ->name('calander');
     Route::get('information','Admin\InformationController@index')
 				->name('information');
     Route::get('information/system',
@@ -61,8 +63,10 @@ Route::prefix('admin')->group( function()
 				->name('databaseinfo');
     Route::get('information/transaction',
 	'Admin\InformationController@index4')
-				->name('transactioninfo'); 
-    Route::view('/', 'admin\manageUser')->name('adminhome');
+				->name('transactioninfo');
+    Route::POST('email/send/{id}','Admin\MailController@send')->name('sendmailtomanager');
+    Route::get('email','Admin\MailController@index')->name('sendmail');
+    Route::get('email/create/{id}','Admin\MailController@create')->name('mailmanager'); 
     Route::get('listuser','Admin\UserController@filter')->name('FilterUser');
  }); 
 Route::view('/manage_service', 'admin/manageService');

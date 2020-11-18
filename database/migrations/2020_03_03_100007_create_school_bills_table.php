@@ -20,8 +20,7 @@ class CreateSchoolBillsTable extends Migration
             $table->integer('transport_bill')->nullable();
             $table->integer('other_bill')->nullable();
             $table->string('receipt_number');
-            $table->integer('total_amount');
-            $table->integer('status');
+            $table->integer('total_amount'); 
             $table->timestamps();
 
             $table->foreign('bill_id')->references('id')->

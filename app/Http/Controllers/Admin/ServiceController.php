@@ -28,7 +28,7 @@ class ServiceController extends Controller
     public function index()
     {
         $list['servicelist'] = Service::where('id','>=',3)
-                    ->paginate(5);
+                    ->paginate(5); 
         return view('admin.service.listservice')->with($list);
     }
 
@@ -51,10 +51,34 @@ class ServiceController extends Controller
      */
     public function store(Request $request, Service $service)
     {  
+        if ($request->hasFile('servicephoto')) {
+            // Get filename with the extendsion
+            $filenameWithExt = $request->file('servicephoto')->getClientOriginalName();
+
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+            //get Just Extenstion
+            $extension = $request->file('servicephoto')->getClientOriginalExtension();
+
+            // Filename to store
+            $filenameToStore = $filename.'_'.time().'.'.$extension;
+
+            // Upload to database
+            $path = $request->file('servicephoto')->storeAs('public/logo', $filenameToStore);
+        }
+        else
+        {
+            $filenameToStore='noImage.jpg';
+        }
         $service->service_name = $request->name;
         $service->http = $request->http;
         $service->mobile_bank_id = $request->mobilelist;
         $service->bank_account = $request->account;
+        $service->payment_start = $request->paymentstart;
+        $service->payment_end = $request->paymentend;
+        $service->group = $request->group;
+        $service->image = $filenameToStore;
         $service->save();
         return redirect()->route('admin.manager.index');
     }
@@ -67,7 +91,7 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-       $serlist = Service::all()->where('id',$id);
+       $serlist = Service::find($id);
        $registeredusers = Register::where('service_id',$id)
                         ->paginate(5);
        return view('admin.service.show')

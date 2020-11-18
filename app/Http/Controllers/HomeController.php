@@ -30,12 +30,11 @@ class HomeController extends Controller
         }
         elseif(Auth::user()->service_id == 2)
         {   
-           return view('admin.manageUser'); 
+           return redirect()->route('adminhome'); 
         }
         else
         {
             return redirect('/manage_service_user');
-        }
-
+        } 
     }
 }

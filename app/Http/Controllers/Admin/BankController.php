@@ -49,10 +49,31 @@ class BankController extends Controller
      */
     public function store(Request $request, MobileBank $bank)
     {
+        if ($request->hasFile('bankphoto')) {
+            // Get filename with the extendsion
+            $filenameWithExt = $request->file('bankphoto')->getClientOriginalName();
+
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+            //get Just Extenstion
+            $extension = $request->file('bankphoto')->getClientOriginalExtension();
+
+            // Filename to store
+            $filenameToStore = $filename.'_'.time().'.'.$extension;
+
+            // Upload to database
+            $path = $request->file('bankphoto')->storeAs('public/logo', $filenameToStore);
+        }
+        else
+        {
+            $filenameToStore='noImage.jpg';
+        }
         
         $bank->id= $request->bankid;
         $bank->bank_name = $request->bankname;
         $bank->http = $request->bankhttp;
+        $bank->image = $filenameToStore;
         $bank->save();
         return redirect()->route('admin.bank.index');
     }

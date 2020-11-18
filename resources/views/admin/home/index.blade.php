@@ -1,100 +1,34 @@
 @extends('layouts.admin')
  
 @section('content')
-
-<div class="container">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">System Management | <b>{{$userinfo->name}}</b> </h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active"><b>User</b></li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header --> 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{$uc}}</h3>
-
-                <p>Active <b>Users</b></p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>{{$rc}}</h3>
-
-                <p><b>Registered</b> in Service</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>{{ $sc }}</h3>
-
-                <p><b>Services</b> On Our System</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>{{ $hc }}</h3>
-
-                <p><b>Transactions</b> Daily</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-            </div>
-          </div>
-          <!-- ./col -->
-        </div> 
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-
-      <div class="row">
-        <div class="col-sm-4">     
-        </div>
-        <div class="col-sm-4">
-        </div>
-        <div class="col-sm-4">      
-        </div>
-      </div>
-    </section> 
-    <!-- /.content -->
+<div class="container"><hr>
+	<div class="row ml-4">
+		<div class="col-sm-6">
+			<h4 class="text-info ml-4"><b>No of Users In Each Service</b></h4>
+		</div>
+		<div class="col-sm-6">
+			<h4 class="text-info ml-4"><b>No of Users In Each Mobile Banking</b></h4>
+		</div>
+	</div><hr><br>
+	<div class="row ml-2">
+		<div class="col-sm-6" style="border-left: solid 3px seagreen; border-radius: 20px;">
+			{!! $chart->container() !!}
+		</div>
+		<div class="col-sm-6" style="border-left: solid 3px seagreen; border-radius: 20px;">
+			{!! $chart2->container() !!}
+		</div>
+	</div><hr><br>
+	<div class="row">
+		<div class="col-sm-6">
+			<h4 class="text-info ml-4"><b>No of Users In Each Service</b></h4>
+		</div>
+		<div class="col-sm-6">
+			<h4 class="text-info ml-4"><b>No of Users In Each Mobile Banking</b></h4>
+		</div>
+	</div><hr><br>
+		
+		{!! $chart->script() !!}  
+		{!! $chart2->script() !!} 
 </div>
 @endsection
 

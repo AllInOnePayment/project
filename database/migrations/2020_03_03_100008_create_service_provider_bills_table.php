@@ -19,8 +19,7 @@ class CreateServiceProviderBillsTable extends Migration
             $table->string('last_reading')->nullable();
             $table->string('current_reading')->nullable();
             $table->string('receipt_number');
-            $table->integer('bill_amount');
-            $table->integer('status');
+            $table->integer('bill_amount'); 
             $table->timestamps();
 
             $table->foreign('bill_id')->references('id')->

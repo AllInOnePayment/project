@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
@@ -56,6 +58,11 @@ class AddmanagerController extends Controller
         $user->service_id = $request->service;
         $user->password = $request->pass;
         $user->save();
+        $detail = [
+            'username' => $user->name,
+            'password' => $user->password
+        ];
+        Mail::to($user->email)->send(new WelcomeMail($detail));
         return redirect()->route('admin.manager.index');
     }
 

@@ -50,17 +50,9 @@
       <div class="form-group has-feedback display-flex">
         <input type="password" name="repass" class="form-control" placeholder="Retaype Password">
         <span class="fa fa-lock form-control-feedback"></span>
-      </div>
+      </div> 
       <div class="form-group has-feedback display-flex">
-        <select name="serviceName" class="form-control">
-          <option>Select Service Name</option>
-          @foreach($servicelist as $sl)
-              <option value="{{ $sl->id}}">{{ $sl->service_name}}</option>
-          @endforeach
-        </select>
-      </div>
-      <div class="form-group has-feedback display-flex">
-        <input type="file" name="photo">
+        <input type="file" name="userphoto">
         <label>Profile Photo</label>
       </div>
       <div class="col-4">

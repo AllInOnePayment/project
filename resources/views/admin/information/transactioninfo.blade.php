@@ -23,9 +23,18 @@
 <hr>
 <section class="container-fluid">
 <div class="row">
-	<div class="col-sm-6">
+	<div class="col-sm-6 ml-3">
+		<p class="text-primary"><b>Latest Transactions</b></p>
+	</div>
+	<div class="col-sm-5 ml-3">
+		<p class="text-primary"><b>Transactions By Each Mobile Banking</b></p>
+	</div>
+</div><hr>
+<div class="row">
+
+	<div class="col-sm-6 mr-2">
 			@foreach($transaction as $tr)
-	<div class="card card-info collapsed-card card-outline">
+	<div class="card card-info collapsed-card card-outline" style="border-left: solid seagreen 3px; border-radius: 25px;">
 		<div class="card-header">
 			<h3 class="card-title">Date : {{ $tr->created_at}}</h3>
 			<div class="card-tools">
@@ -70,8 +79,16 @@
 		</div>
 	</div><hr>
 		    @endforeach	 
-		</div>
 	</div>
-			
+	<div class="col-sm-5 mr-3" style="border-left: solid seagreen 3px; border-radius: 25px;">
+		{!! $TraChart->container() !!}
+	</div>
+</div>
+<div class="row"><div class="col-sm-4"></div>
+    <div class="col-sm-4"> 
+    	{{ $transaction->render()}}
+    </div><div class="col-sm-4"></div>
+</div>   
+		{!! $TraChart->script() !!} 	
 </section>
 @endsection()
