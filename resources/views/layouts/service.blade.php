@@ -138,6 +138,7 @@
               <p>send notification</p>
             </a>
           </li>
+
           <li class="nav-item">
             <a href="{{ route('ServiceNews.index') }}" class="nav-link
             @if($segment=='ServiceNews')
@@ -147,6 +148,17 @@
               <p>send news</p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{ route('History.index') }}" class="nav-link
+            @if($segment=='History')
+            active
+            @endif">
+              <i class="nav-icon fas fa-th"></i>
+              <p>Payment History</p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

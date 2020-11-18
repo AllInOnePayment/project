@@ -60,6 +60,8 @@ Route::get('service/UserRegisterController/{id}','service\UserRegisterController
 Route::get('TestsController/{id}','TestsController@index')->name('Tests.index');
 Route::post('service/UserRegisterController/{id}','service\UserRegisterController@store')->name('UserRegister.store');
 
+Route::get('service/History/index','Service\HistoryController@index')->name('History.index');
+
 Route::view('/manage_service_user', 'service/manageUser');
 Route::view('/notifay', 'service/notifay');
 Route::view('/send_bill', 'service/send_bill');

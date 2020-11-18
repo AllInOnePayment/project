@@ -11,9 +11,9 @@
                     <tr>
                         <th>Online status</th>
                         <th>Payment status</th>
-                        @if(session()->get('service_id')>5)
+                        @if(session()->get('group')==4)
                             <th>Grade</th> 
-                            <th>Department</th>
+                            
                             <th>Class</th>
                             <th>Transport use</th>  
                         @endif
