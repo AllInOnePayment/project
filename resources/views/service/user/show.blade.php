@@ -12,7 +12,7 @@
                 
                 <p><label for="User_number">User number : {{$data->user_number}}</label></p>
                 <p><label for="User_name">User name : {{$data->user_name}}</label></p>
-                @if(session()->get('service_id')>5)
+                @if(session()->get('group')==4)
                     <p><label for="Grade">Grade : {{$data->level}}</label></p>
                     <p><label for="address">Address : {{$data->address}}</label></p>
                     <p><label for="Class">Class : {{$data->class}}</label></p>

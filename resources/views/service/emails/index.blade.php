@@ -1,10 +1,12 @@
 @extends('layouts.service')
 
 @section('content')
-
 <div class="container">
-            <form action="{{route('ServiceNotification.store')}}" method="POST">
-                    @csrf 
+
+
+
+    <form action="{{ route('Mail.send')}}" method="post">
+    @csrf 
                     <div class="row">
                     <div class="col-6">
                     <div class="form-group">
@@ -23,25 +25,14 @@
                        <option value="3">Notification in the due date</option>
                        <option value="4">Notification after due date</option>                
                 </select>
-            </div>
+                 
+            </div>  
+                    <input type="submit" value="Send Email To All" class="btn btn-primary">
                     </div>
 
-                    <div class="col-1">
-                    </div>
-                    <div class="col-5 card" >
-                    <label for="title"> <br>Description : </label>
-                    <label for="description"><br> This text field is prepared for sending notification for users while Users are  
-                      <br>*5 Days behind the due date <br>
-                      *3 Days behind the due date <br>
-                      *In the due date <br>
-                      *After the due date. </label>
-                    </div> 
-                    </div>     
-                <button type="submit" class="btn btn-primary">Add notification</button>
-                <a href="{{route('ServiceNotification.index')}}" class="btn btn-warning">Cancel</a> 
-                </form>
-    </div>
+               </div>
+    </form>
+     
+</div>
 
-    
-    
 @endsection

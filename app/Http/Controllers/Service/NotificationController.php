@@ -24,9 +24,9 @@ class NotificationController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->input('date')) {
-            dd($request->input('date'));
-        }
+        // if ($request->input('date')) {
+        //     dd($request->input('date'));
+        // }
         // if (false) {
         //     $tDate=date('d');
         //     $paymentDate=5;
@@ -75,12 +75,22 @@ class NotificationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $notification=new Notification();
-        $notification->service_id=session()->get('service_id');
-        $notification->title=$request->input('title');
-        $notification->notification=$request->input('body');
-        $notification->save();
+    {  $check=Notification::all()->where('service_id',session()->get('service_id'))->where('status',$request->input('status'))->first();
+        if (!$check) {
+            $notification=new Notification();
+            $notification->service_id=session()->get('service_id');
+            $notification->title=$request->input('title');
+            $notification->notification=$request->input('body');
+            $notification->status=$request->input('status');
+            $notification->save();
+        }else {
+            $notification=Notification::find($check->id);
+            $notification->service_id=session()->get('service_id');
+            $notification->title=$request->input('title');
+            $notification->notification=$request->input('body');
+            $notification->save();
+        }
+       
         
         return redirect()->route('ServiceNotification.index');
     }
@@ -122,6 +132,7 @@ class NotificationController extends Controller
         $notification->service_id=session()->get('service_id');
         $notification->title=$request->input('title');
         $notification->notification=$request->input('body');
+        $notification->status=$request->input('status');
         $notification->save();
         
         return redirect()->route('ServiceNotification.index');

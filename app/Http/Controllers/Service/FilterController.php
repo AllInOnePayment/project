@@ -32,7 +32,7 @@ class FilterController extends Controller
             }else{
                 $data=ServiceProvider::all()->where('service_id',$sid)->where('status',$request->status)->where('Payment_status',$request->payment);
             }
-            
+            $datagrade="";
         }
         else{   $datagrade=SchoolInfo::all()->where('service_id',$sid)->first();
             $filter = array('status' =>$request->status ,

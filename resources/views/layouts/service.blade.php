@@ -158,6 +158,15 @@
               <p>Payment History</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('Mail.index') }}" class="nav-link
+            @if($segment=='Mail')
+            active
+            @endif">
+              <i class="nav-icon fas fa-th"></i>
+              <p>Send Email </p>
+            </a>
+          </li>
 
         </ul>
       </nav>

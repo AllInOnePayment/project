@@ -4,10 +4,7 @@
 
 <div class="container">
     <div class="content-header">
-        <h3>To send specific notification</h3>
-       
-        
-        <a href="{{route('ServiceNotification.create')}}" class="btn btn-info">Send notification</a> 
+        <a href="{{route('ServiceNotification.create')}}" class="btn btn-info">Add notifications</a> 
     </div> 
     {{-- <form action="{{route('ServiceNotification.index')}}" method="POST">
         @csrf

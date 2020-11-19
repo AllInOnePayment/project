@@ -7,6 +7,13 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
+use App\Events\NewsForAllCustomerEvent;
+use App\Events\NewManagerHasRegisteredEvent;
+use App\Events\SendNotficationToCustomerEvent;
+use App\Listeners\NewsCustomerListner;
+use App\Listeners\SendNotficationToCustomerListener;
+use App\Listeners\NewManagerRegisteredListener;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -15,8 +22,14 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
+        NewsForAllCustomerEvent::class => [
+            NewsCustomerListner::class,
+        ],
+        NewManagerHasRegisteredEvent::class => [
+            NewManagerRegisteredListener::class,
+        ],
+        SendNotficationToCustomerEvent::class => [
+            SendNotficationToCustomerListener::class,
         ],
     ];
 

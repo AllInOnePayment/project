@@ -33,6 +33,11 @@
             </form>
             </div>
         </div>
+        <div class="col-sm-6"> 
+        <p><label for="name">Account Balance : {{$data->bank->balance}} </label></p>
+        <a href="{{route('ServiceProfile.editaccount',1)}}" class="btn btn-primary">WithDraw</a>
+        <a href="{{route('ServiceProfile.editaccount',2)}}" class="btn btn-primary">Deposit</a>
+        </div>
     </div>
     
 @endsection

@@ -7,11 +7,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\User;
+use App\MobileBank;
 
 class ServiceProfileController extends Controller
 {
     function index(){
-        return view('service.profile.index');
+       
+        $data=User::find(Auth::user()->id);
+       
+        return view('service.profile.index',['data'=>$data]);
     }
     function edit(){
         $err_pass="";
@@ -81,4 +85,15 @@ class ServiceProfileController extends Controller
         
         return view('service.profile.edit',['err_pass'=>$err_pass]);
     } 
+    public function editaccount($id){
+
+        $bank=MobileBank::All();
+        
+       if($id==1){
+        return view('service.profile.withdraw',['bank'=>$bank]);
+       }
+       else{
+        return view('service.profile.deposit',['bank'=>$bank]);
+       }
+    }
 }

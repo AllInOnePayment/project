@@ -34,6 +34,7 @@ class ServiceUserController extends Controller
         if($gid==3)
         {
               $data=ServiceProvider::all()->where('service_id',$sid)->where('status',1);
+              $datagrade="";
         }
         else{
 
