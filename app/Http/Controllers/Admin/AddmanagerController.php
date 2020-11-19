@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Mail\WelcomeMail;
-use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Service;
 use App\MobileBank;
-use App\Events\NewManagerHasRegisteredEvent;
+use App\Events\NewManagerHasRegisteredEvent; 
 
 class AddmanagerController extends Controller
 {
@@ -63,10 +61,14 @@ class AddmanagerController extends Controller
             'username' => $user->name,
             'password' => $user->password
         ];
-
-        //event(new NewManagerHasRegisteredEvent($user));
-
-        Mail::to($user->email)->send(new WelcomeMail($detail));
+ 
+        $message = [
+            'username' => $user->name,
+            'password' => $user->password,
+            'email' => $user->email
+        ];
+        event(new NewManagerHasRegisteredEvent($message));
+        //Mail::to($user->email)->send(new WelcomeMail($detail));
         
         return redirect()->route('admin.manager.index');
     }

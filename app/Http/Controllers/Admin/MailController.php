@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use App\Events\NewsForAllCustomerEvent;
 
 class MailController extends Controller
 {
@@ -34,6 +35,20 @@ class MailController extends Controller
     	Mail::to($managersend->email)->send(new SendInfoMail($detials));
         
     	return redirect()->route('sendmail');
+    }
+
+    public function mailcustomer()
+    {
+        return view('admin.emails.customercreate');
+    }
+
+    public function sendcustomer(Request $request)
+    {
+        $user = User::all(); 
+        $message = $request->message;
+        event(new NewsForAllCustomerEvent($user, $message));
+        return redirect()->route('sendmail');
+
     }
 
 }

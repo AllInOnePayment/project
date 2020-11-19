@@ -67,6 +67,8 @@ Route::prefix('admin')->group( function()
     Route::POST('email/send/{id}','Admin\MailController@send')->name('sendmailtomanager');
     Route::get('email','Admin\MailController@index')->name('sendmail');
     Route::get('email/create/{id}','Admin\MailController@create')->name('mailmanager'); 
+    Route::get('email/customer','Admin\MailController@mailcustomer')->name('sendtocustomer');
+    Route::POST('email/customer/send','Admin\MailController@sendcustomer')->name('sendmailtocustomer');
     Route::get('listuser','Admin\UserController@filter')->name('FilterUser');
  }); 
 Route::view('/manage_service', 'admin/manageService');

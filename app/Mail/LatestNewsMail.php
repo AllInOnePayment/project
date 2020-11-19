@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class WelcomeMail extends Mailable
+class LatestNewsMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,7 +18,7 @@ class WelcomeMail extends Mailable
      * @return void
      */
     public function __construct($message)
-    {
+    { 
         $this->message = $message;
     }
 
@@ -28,7 +28,7 @@ class WelcomeMail extends Mailable
      * @return $this
      */
     public function build()
-    {
-        return $this->markdown('admin.emails.welcome');
+    {   
+        return $this->markdown('admin.emails.latestnews');
     }
 }

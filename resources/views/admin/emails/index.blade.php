@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
 <section class="container">
 	 <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -13,11 +12,12 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('adminhome')}}">Home</a></li>
-              <li class="breadcrumb-item active"><b>Send|Email</b></li>
+              <li class="breadcrumb-item active"><b>Send|Email</b></li> 
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
+      <a href="{{ route('sendtocustomer')}}" class="btn btn-primary">Send To All Customer</a>
     </div>  <hr> 
 	<div class="row">
 		<div class="col-sm-1"></div>
